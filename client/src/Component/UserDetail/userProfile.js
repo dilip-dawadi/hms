@@ -20,22 +20,17 @@ export default function SimpleMenu() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [aUser, setaUser] = useState();
+    const { AsingleUser } = useSelector(state => state.Auth);
+
     useEffect(() => {
         dispatch(singleUser(user?.result._id));
-    }, [user?.result._id, dispatch]);
-    const { AsingleUser, deleteUserMessage } = useSelector(state => state.Auth);
-    const [deleteUserMsg, setdeleteUserMsg] = useState(null);
-
-    useEffect(() => {
-        setdeleteUserMsg(deleteUserMessage);
-    }, [deleteUserMessage]);
-    console.log(deleteUserMsg);
-
-    const [aUser, setaUser] = useState();
+    }, [user, dispatch]);
     useEffect(() => {
         setaUser(AsingleUser);
-    }, [AsingleUser]);
+    }, [AsingleUser, dispatch]);
     const [openM, setOpenM] = React.useState(false);
+
     const handleOpenM = () => {
         setOpenM(true);
     };
