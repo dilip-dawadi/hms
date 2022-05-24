@@ -5,6 +5,7 @@ import { legacy_createStore as createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { reducers } from './Component/redux/reducers';
 import App from './App';
+import './index.css';
 import { composeWithDevTools } from '@redux-devtools/extension'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

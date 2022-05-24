@@ -69,8 +69,9 @@ export const signup = async (req, res) => {
 export const singleUser = async (req, res) => {
     const { id } = req.params;
     try {
+        if (!id) return res.status(404).json({ message: 'User not found' });
         const singleUser = await User.findById(id);
-        res.status(200).json({ singleUser, message: "User Found" });
+        res.status(200).json({ singleUser, message: "Profile Page" });
     } catch (error) {
         res.json({ message: error });
     }

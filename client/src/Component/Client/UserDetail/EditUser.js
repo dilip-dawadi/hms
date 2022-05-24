@@ -4,10 +4,10 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSingleUser } from '../redux/actions/Auth';
+import { updateSingleUser } from '../../redux/actions/Auth';
 import { Button, Typography, TextField } from '@material-ui/core';
 // import Input from '../Admin/Auth/Auth';
-import { storage } from '../Admin/firebase';
+import { storage } from '../../Admin/firebase';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
 const useStyles = makeStyles((theme) => ({

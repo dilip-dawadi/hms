@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Menu from '@material-ui/core/Menu';
 import Avatar from '@material-ui/core/Avatar';
-import MenuItem from '@material-ui/core/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Paper from '@mui/material/Paper';
@@ -14,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditUser from './EditUser';
-import { singleUser, deleteUser } from '../redux/actions/Auth';
+import { singleUser, deleteUser } from '../../redux/actions/Auth';
 
 export default function SimpleMenu() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -24,7 +22,9 @@ export default function SimpleMenu() {
     const { AsingleUser } = useSelector(state => state.Auth);
 
     useEffect(() => {
-        dispatch(singleUser(user?.result._id));
+        return () => {
+            dispatch(singleUser(user?.result._id));
+        }
     }, [user, dispatch]);
     useEffect(() => {
         setaUser(AsingleUser);
@@ -36,7 +36,7 @@ export default function SimpleMenu() {
     };
     const delUser = () => {
         dispatch(deleteUser(aUser._id, navigate));
-        navigate('/');
+        navigate('/auth ');
     }
 
     const logout = () => {

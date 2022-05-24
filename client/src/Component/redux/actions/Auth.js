@@ -1,15 +1,15 @@
 // this file help to get data from mongoodb
 import { AUTH, FETCH_SINGLEUSER, UPDATE_SINGLE_USER } from "../constants/actionTypes";
 import * as api from '../api'
-import { NotifyError, NotifySuccess } from "../notify";
+import { NotifyError, NotifySuccess } from "./notify";
 
 // dispatching is this whole action
 export const signin = (formData, navigate) => async (dispatch) => {
     try {
         const { data } = await api.signIn(formData);
         dispatch({ type: AUTH, data });
-        navigate('/userDetail');
-        // NotifySuccess(data.message);
+        navigate('/home');
+        NotifySuccess(data.message);
     } catch (error) {
         if (error.response.status >= 400 && error.response.status <= 500) {
             NotifyError(error.response.data.message);
@@ -35,9 +35,10 @@ export const signup = (formData) => async (dispatch) => {
 
 export const singleUser = (id) => async (dispatch) => {
     try {
+        console.log(id, "from id fronend");
         const { data: { singleUser, message } } = await api.singleUser(id);
         dispatch({ type: FETCH_SINGLEUSER, payload: { singleUser: singleUser } })
-        // NotifySuccess(message);
+        NotifySuccess(message);
     } catch (error) {
         if (error.response.status >= 400 && error.response.status <= 500) {
             NotifyError(error.response.data.message);
