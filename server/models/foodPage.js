@@ -15,9 +15,6 @@ const foodPageSchema = mongoose.Schema({
     quantity: {
         type: String
     },
-    category: {
-        type: [String]
-    },
     createdAt: {
         type: Date,
         default: Date.now

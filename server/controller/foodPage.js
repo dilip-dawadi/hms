@@ -12,7 +12,7 @@ export const getFoodPage = async (req, res) => {
 }
 
 export const createFoodPage = async (req, res) => {
-    const { title, description, selectedFile, price, tags, quantity, category } = req.body;
+    const { title, description, selectedFile, price, tags, quantity } = req.body;
     try {
         if (!title || !description) {
             return res.status(400).json({
@@ -39,12 +39,7 @@ export const createFoodPage = async (req, res) => {
                 message: "Please provide a quantity"
             });
         }
-        if (!category) {
-            return res.status(400).json({
-                message: "Please provide a category"
-            });
-        }
-        const foodPageData = new foodPage({ title, description, selectedFile, price, tags, quantity, category });
+        const foodPageData = new foodPage({ title, description, selectedFile, price, tags, quantity });
         const savedFoodPage = await foodPageData.save();
         res.status(200).json({ savedFoodPage, message: "Food item created successfully" });
     } catch (error) {
