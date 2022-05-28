@@ -1,16 +1,9 @@
 import React from 'react'
-import HomePageForm from './homePageAdmin/HomePageForm/homePageForm.js'
-import HomePagePost from './homePageAdmin/homePagePost/slider'
+import FoodPage from './foodPageForm/foodPageForm'
+import FoodPagePost from './foodPagePost/foodPagePost';
 import { Grow, Grid, Paper } from '@material-ui/core';
-import ClientHomePost from '../Client/homePage/homePost'
-import Drawer from './homePageAdmin/Drawer/drawer.js';
-const AdminPage = () => {
-    const user = JSON.parse(localStorage.getItem('profile'))
-    if (!user?.result.role) {
-        return (
-            <ClientHomePost />
-        )
-    }
+import Drawer from '../Drawer/drawer.js';
+const FoodAdminPage = () => {
     return (
         <Grow in={true}>
             <Grid container justifyContent="space-between" alignItems="stretch" style={{
@@ -27,10 +20,10 @@ const AdminPage = () => {
                         padding: '0px',
                     }}>
                         <Grid item xs={12} sm={12} md={12}>
-                            <HomePageForm />
+                            <FoodPage />
                         </Grid>
                         <Grid item xs={12} sm={12} md={12}>
-                            <HomePagePost />
+                            <FoodPagePost />
                         </Grid>
                     </Paper>
                 </Grid>
@@ -39,4 +32,4 @@ const AdminPage = () => {
     )
 }
 
-export default AdminPage;
+export default FoodAdminPage;

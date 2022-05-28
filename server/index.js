@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 import userRoutes from './routes/users.js'
 import homePageRoutes from './routes/homePage.js'
+import foodPageRoutes from './routes/foodPage.js'
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
 app.use('/user', userRoutes)
 app.use('/homePage', homePageRoutes)
+app.use('/foodPage', foodPageRoutes)
 app.get('/', (req, res) => {
   res.send('Hello this is HMS')
 })
