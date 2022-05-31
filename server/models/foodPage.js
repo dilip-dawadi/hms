@@ -15,11 +15,11 @@ const foodPageSchema = mongoose.Schema({
     quantity: {
         type: String
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
+},
+    {
+        timestamps: true
     }
-});
+);
 
 const foodPage = mongoose.model('foodPage', foodPageSchema);
 

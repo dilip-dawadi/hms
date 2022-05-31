@@ -41,14 +41,50 @@ export const createFoodPage = async (req, res) => {
         }
         const foodPageData = new foodPage({ title, description, selectedFile, price, tags, quantity });
         const savedFoodPage = await foodPageData.save();
-        res.status(200).json({ savedFoodPage, message: "Food item created successfully" });
+        res.status(200).json({ savedFoodPage, message: "Food Item Created Successfully" });
     } catch (error) {
         res.json({
             message: error.message
         });
     }
 }
+export const updateFoodPage = async (req, res) => {
+    const { id } = req.params;
+    const { title, description, selectedFile, price, tags, quantity } = req.body;
+    try {
+        if (!title || !description) {
+            return res.status(400).json({
+                message: "Please provide all required fields"
+            });
+        };
+        if (!selectedFile) {
+            return res.status(400).json({
+                message: "Please provide a file"
+            });
+        }
+        if (!price) {
+            return res.status(400).json({
+                message: "Please provide a price"
+            });
+        }
+        if (!tags) {
+            return res.status(400).json({
+                message: "Please provide a tags"
+            });
+        }
+        if (!quantity) {
+            return res.status(400).json({
+                message: "Please provide a quantity"
+            });
+        }
+        const foodPageUpdate = { title, description, selectedFile, price, tags, quantity };
+        const updateFoodPage = await foodPage.findByIdAndUpdate(id, foodPageUpdate, { new: true });
+        res.json({ updateFoodPage, message: "Food Item Updated Successfully" });
+    } catch (error) {
+        res.json({ message: error });
+    }
 
+}
 export const deleteFood = async (req, res) => {
     const { id } = req.params;
     try {

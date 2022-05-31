@@ -14,7 +14,6 @@ export const signin = async (req, res) => {
     try {
         // finding exisiting old user
         const existingUser = await User.findOne({ email });
-
         if (!existingUser)
             return res.status(404).json({ message: 'User not found' });
 
@@ -22,10 +21,12 @@ export const signin = async (req, res) => {
 
         if (!isPasswordCorrect) return res.status(404).json({ message: 'Password Incorrect' });
 
-        const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.JWT, { expiresIn: '1d' });
-
-        res.status(200).json({ result: existingUser, token, message: "Signin Successful" });
-
+        const token = jwt.sign({ email: existingUser.email, id: existingUser._id, role: existingUser.role }, process.env.JWT, { expiresIn: '1d' });
+        if (existingUser.role === 1) {
+            res.status(200).json({ result: existingUser, token, message: `Welcome Admin, ${existingUser.name.split(" ")[0]}` });
+        } else {
+            res.status(200).json({ result: existingUser, token, message: `Welcome Back!, ${existingUser.name.split(" ")[0]}` });
+        }
     } catch (err) {
         res.status(500).json({ message: err.message })
     }

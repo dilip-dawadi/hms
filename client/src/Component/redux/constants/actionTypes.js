@@ -9,6 +9,7 @@ export const FETCH_HOMEPAGE = 'FETCH_HOMEPAGE';
 export const CREATE_HOMEPAGE = 'CREATE_HOMEPAGE';
 export const START_HOMEPAGE = 'START_HOMEPAGE';
 export const END_HOMEPAGE = 'END_HOMEPAGE';
+export const DELETE_HOMEPAGE = 'DELETE_HOMEPAGE';
 
 // foodPage
 export const FETCH_FOODPAGE = 'FETCH_FOODPAGE';

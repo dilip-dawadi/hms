@@ -11,8 +11,6 @@ import Edit from '@mui/icons-material/Edit';
 function FoodPostAdmin() {
     const dispatch = useDispatch();
     const { isLoading, foodPageData } = useSelector((state) => state.foodPage);
-    const reverse = foodPageData.reverse();
-    console.log(reverse);
     useEffect(() => {
         return () => {
             dispatch(fetchFoodPage());
@@ -30,9 +28,9 @@ function FoodPostAdmin() {
             height: '100px'
         }} /> :
             (<div style={{ borderRadius: "15px", padding: "80px 15px 20px 15px" }}>
-                {foodPageData?.reverse().map((foodData) => (
-                    <Paper key={foodData._id} elevation={3} style={{ borderRadius: "12px", margin: '10px auto' }}>
-                        <div key={foodData._id} className={classes.card}>
+                {foodPageData?.map((foodData) => (
+                    <Paper key={foodData?._id} elevation={3} style={{ borderRadius: "12px", margin: '10px auto' }}>
+                        <div className={classes.card}>
                             <div className={classes.section}>
                                 <div className={classes.section1}>
                                     <div className={classes.imageSection}>

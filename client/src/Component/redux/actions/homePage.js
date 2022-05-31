@@ -1,5 +1,5 @@
 import * as api from '../api';
-import { FETCH_HOMEPAGE, CREATE_HOMEPAGE, START_HOMEPAGE, END_HOMEPAGE } from '../constants/actionTypes';
+import { FETCH_HOMEPAGE, CREATE_HOMEPAGE, START_HOMEPAGE, END_HOMEPAGE, DELETE_HOMEPAGE } from '../constants/actionTypes';
 import { NotifyError, NotifySuccess } from './notify';
 
 export const fetchHomePage = () => async (dispatch) => {
@@ -24,6 +24,20 @@ export const createHomePage = (formData) => async (dispatch) => {
         dispatch({ type: CREATE_HOMEPAGE, payload: { savedHomePage } });
         NotifySuccess(message);
         dispatch({ type: END_HOMEPAGE });
+    } catch (error) {
+        if (error.response.status >= 400 && error.response.status <= 500) {
+            NotifyError(error.response.data.message);
+        } else {
+            NotifyError(error.message);
+        }
+    }
+}
+
+export const deleteHome = (id) => async (dispatch) => {
+    try {
+        const { data: { message } } = await api.deleteHome(id);
+        dispatch({ type: DELETE_HOMEPAGE, payload: id })
+        NotifySuccess(message);
     } catch (error) {
         if (error.response.status >= 400 && error.response.status <= 500) {
             NotifyError(error.response.data.message);

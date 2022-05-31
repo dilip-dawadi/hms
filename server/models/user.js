@@ -14,7 +14,10 @@ const userSchema = mongoose.Schema({
     role: { type: Number, default: 0 },
     number: { type: String },
     address: { type: String },
-});
+},
+    {
+        timestamps: true
+    });
 
 const userDetail = mongoose.model('UserDetails', userSchema);
 
