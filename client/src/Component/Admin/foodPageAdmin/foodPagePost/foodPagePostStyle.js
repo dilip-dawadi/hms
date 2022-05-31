@@ -4,9 +4,9 @@ export default makeStyles((theme) => ({
     media: {
         borderRadius: '20px',
         objectFit: 'cover',
-        width: '98%',
+        width: '90%',
         maxWidth: '630px',
-        maxHeight: '450px',
+        maxHeight: '250px',
         [theme.breakpoints.down('sm')]: {
             width: '100%',
             margin: 'auto',
@@ -19,7 +19,7 @@ export default makeStyles((theme) => ({
     },
     buy: {
         margin: 'auto',
-        padding: '8px 20px',
+        padding: '8px 40px',
         border: '0px solid white',
         borderRadius: '12px',
         backgroundColor: '#595775',
@@ -50,7 +50,7 @@ export default makeStyles((theme) => ({
         borderRadius: '6px',
         padding: '3px 7px',
         margin: '2px 3px',
-        fontSize: '13px',
+        fontSize: '14px',
         backgroundColor: '#595775',
         '&:hover': {
             backgroundColor: '#595775',
@@ -81,5 +81,8 @@ export default makeStyles((theme) => ({
     },
     imageSection: {
         margin: 'auto',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 }));

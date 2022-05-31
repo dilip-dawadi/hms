@@ -27,3 +27,4 @@ export const createHomePage = (formData) => API.post(`/homepage`, formData);
 // fetch foodPage
 export const getFoodPage = () => API.get(`/foodpage`);
 export const createFoodPage = (formData) => API.post(`/foodpage`, formData);
+export const deleteFood = (id) => API.delete(`/foodpage/deletefood/${id}`)
