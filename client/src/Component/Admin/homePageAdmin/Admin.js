@@ -5,8 +5,9 @@ import { Grow, Grid, Paper } from '@material-ui/core';
 import ClientHomePost from '../../Client/homePage/homePost'
 import Drawer from '../Drawer/drawer.js';
 const AdminPage = () => {
-    const user = JSON.parse(localStorage.getItem('profile'))
-    if (!user?.result.role) {
+    const role = JSON.parse(localStorage.getItem('profile'))
+    const [updateHomeCurrentId, setupdateHomeCurrentId] = React.useState(null);
+    if (!role) {
         return (
             <ClientHomePost />
         )
@@ -27,10 +28,10 @@ const AdminPage = () => {
                         padding: '0px',
                     }}>
                         <Grid item xs={12} sm={12} md={12}>
-                            <HomePageForm />
+                            <HomePageForm updateHomeCurrentId={updateHomeCurrentId} setupdateHomeCurrentId={setupdateHomeCurrentId} />
                         </Grid>
                         <Grid item xs={12} sm={12} md={12}>
-                            <HomePagePost />
+                            <HomePagePost setupdateHomeCurrentId={setupdateHomeCurrentId} />
                         </Grid>
                     </Paper>
                 </Grid>

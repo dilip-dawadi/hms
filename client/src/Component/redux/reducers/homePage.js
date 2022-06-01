@@ -1,4 +1,4 @@
-import { FETCH_HOMEPAGE, CREATE_HOMEPAGE, START_HOMEPAGE, END_HOMEPAGE, DELETE_HOMEPAGE } from "../constants/actionTypes";
+import { FETCH_HOMEPAGE, CREATE_HOMEPAGE, START_HOMEPAGE, END_HOMEPAGE, DELETE_HOMEPAGE, UPDATE_HOMEPAGE } from "../constants/actionTypes";
 export default (state = { isLoading: true, homePageData: [] }, action) => {
     switch (action.type) {
         case START_HOMEPAGE:
@@ -21,6 +21,8 @@ export default (state = { isLoading: true, homePageData: [] }, action) => {
                 ...state,
                 homePageData: [...state.homePageData, action.payload.savedHomePage]
             };
+        case UPDATE_HOMEPAGE:
+            return { ...state, homePageData: state.homePageData.map((homeData) => (homeData._id === action.payload.updateHomePage._id ? action.payload.updateHomePage : homeData)) };
         case DELETE_HOMEPAGE:
             return { ...state, homePageData: state.homePageData?.filter((homePage) => homePage._id !== action.payload) }
         default:

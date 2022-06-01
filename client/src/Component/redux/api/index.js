@@ -3,8 +3,8 @@ import axios from 'axios';
 const API = axios.create({ baseURL: 'http://localhost:5000/' });
 
 API.interceptors.request.use((req) => {
-  if (localStorage.getItem('profile')) {
-    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+  if (localStorage.getItem('token')) {
+    req.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
   return req;
 });
@@ -24,7 +24,9 @@ export const deleteUser = (id) => API.delete(`/user/deleteuser/${id}`);
 export const getHomePage = () => API.get(`/homepage`);
 export const createHomePage = (formData) => API.post(`/homepage`, formData);
 export const deleteHome = (id) => API.delete(`/homepage/deletehome/${id}`)
+export const updateHomePage = (id, formData) => API.patch(`/homepage/${id}`, formData);
 // fetch foodPage
 export const getFoodPage = () => API.get(`/foodpage`);
 export const createFoodPage = (formData) => API.post(`/foodpage`, formData);
 export const deleteFood = (id) => API.delete(`/foodpage/deletefood/${id}`)
+export const updateFoodPage = (id, formData) => API.patch(`/foodpage/${id}`, formData);

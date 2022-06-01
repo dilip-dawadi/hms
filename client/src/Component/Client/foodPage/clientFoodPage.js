@@ -2,8 +2,8 @@ import React from 'react'
 import FoodAdminPage from '../../Admin/foodPageAdmin/foodAdmin'
 import FoodClientPage from './clientFood/clientFood'
 const ClientHomePost = () => {
-    const user = JSON.parse(localStorage.getItem('profile'))
-    if (user?.result.role) {
+    const role = JSON.parse(localStorage.getItem('profile'))
+    if (role) {
         return (
             <FoodAdminPage />
         )

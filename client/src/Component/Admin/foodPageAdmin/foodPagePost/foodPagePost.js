@@ -8,7 +8,7 @@ import { Typography, Paper, Divider, CardActions, Button } from '@material-ui/co
 import moment from 'moment';
 import Delete from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
-function FoodPostAdmin() {
+function FoodPostAdmin({ setupdateFoodCurrentId }) {
     const dispatch = useDispatch();
     const { isLoading, foodPageData } = useSelector((state) => state.foodPage);
     useEffect(() => {
@@ -100,6 +100,10 @@ function FoodPostAdmin() {
                                                 size="small"
                                                 className={classes.buy}
                                                 style={{ backgroundColor: "#01bf71" }}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setupdateFoodCurrentId(foodData?._id)
+                                                }}
                                             >
                                                 <Edit />
                                             </Button>

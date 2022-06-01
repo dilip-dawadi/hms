@@ -23,7 +23,7 @@ export default function SimpleMenu() {
 
     useEffect(() => {
         return () => {
-            dispatch(singleUser(user?.result._id));
+            dispatch(singleUser(aUser?._id));
         }
     }, [user, dispatch]);
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function SimpleMenu() {
         setOpenM(true);
     };
     const delUser = () => {
-        dispatch(deleteUser(aUser._id, navigate));
+        dispatch(deleteUser(aUser?._id, navigate));
         navigate('/auth ');
     }
 
