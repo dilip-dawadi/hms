@@ -55,6 +55,11 @@ export default makeStyles((theme) => ({
         '&:hover': {
             backgroundColor: '#595775',
         },
+        // disable
+        '&:disabled': {
+            color: 'white',
+            backgroundColor: '#595775',
+        }
     },
 }));
 

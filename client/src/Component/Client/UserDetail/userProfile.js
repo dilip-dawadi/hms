@@ -23,7 +23,7 @@ export default function SimpleMenu() {
 
     useEffect(() => {
         return () => {
-            dispatch(singleUser(aUser?._id));
+            dispatch(singleUser(user?.result._id));
         }
     }, [user, dispatch]);
     useEffect(() => {
@@ -40,9 +40,8 @@ export default function SimpleMenu() {
     }
 
     const logout = () => {
-        dispatch({ type: "LOGOUT" });
         localStorage.removeItem('profile');
-        navigate('/');
+        navigate('/home');
         setUser(null);
     };
 

@@ -13,6 +13,8 @@ import useStyles from "./clientFoodStyle";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { fetchFoodPage } from "../../../redux/actions/foodPageaction";
+import { addCart, singleUser } from "../../../redux/actions/Auth";
+import { NotifyError } from "../../../redux/actions/notify";
 import FoodHeaderPage from "./FoodHeaderPage";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import moment from "moment";
@@ -20,11 +22,17 @@ import moment from "moment";
 const ClientFoodView = () => {
   const dispatch = useDispatch();
   const { foodPageData } = useSelector((state) => state.foodPage);
+  const [disable, setdisable] = React.useState(false);
+  console.log(disable);
+  const { AsingleUser } = useSelector(state => state.Auth);
+  const user = JSON.parse(localStorage.getItem("profile"));
   useEffect(() => {
     return () => {
       dispatch(fetchFoodPage());
+      if (user) {
+        dispatch(singleUser(user?.result._id));
+      }
     };
-
   }, [dispatch]);
 
   const classes = useStyles();
@@ -38,8 +46,9 @@ const ClientFoodView = () => {
         spacing={2}
       >
         {/* reverse foodPage */}
-        {foodPageData.slice(0, 4).map((foodData) => (
-          <Grid item xs={12} sm={6} md={4} lg={3}>
+        {foodPageData.slice(0, 4).map((foodData) =>
+        (
+          < Grid item xs={12} sm={6} md={4} lg={3} >
             <Card className={classes.card} key={foodData._id} raised elevation={3}>
               <ButtonBase
                 component="span"
@@ -157,9 +166,28 @@ const ClientFoodView = () => {
                 </Typography>
               </div>
               <CardActions className={classes.cardActionsI}>
-                <Button size="small" className={classes.btn} type="button" onClick={() => {
-                }
-                } >
+                <Button size="small" className={classes.btn} type="button" onClick={
+                  () => {
+                    if (user) {
+                      const check = AsingleUser.cart.every(item => {
+                        return item._id !== foodData._id
+                      })
+                      const cart = AsingleUser.cart;
+                      if (check) {
+                        setdisable(true);
+                        setTimeout(() => {
+                          setdisable(false);
+                        }, 2000);
+                        dispatch(singleUser(user?.result?._id));
+                        dispatch(addCart(cart, foodData));
+                      } else {
+                        NotifyError("Item Already Added");
+                      }
+                    } else {
+                      NotifyError("Please Login To Add To Cart");
+                    }
+
+                  }} disabled={disable} >
                   Learn More
                 </Button>
               </CardActions>

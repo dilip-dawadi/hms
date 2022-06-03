@@ -5,9 +5,9 @@ import { Grow, Grid, Paper } from '@material-ui/core';
 import Drawer from '../Drawer/drawer.js';
 import ClientFoodPage from '../../Client/foodPage/clientFoodPage';
 const FoodAdminPage = () => {
-    const role = JSON.parse(localStorage.getItem('profile'))
+    const user = JSON.parse(localStorage.getItem('profile'))
     const [updateFoodCurrentId, setupdateFoodCurrentId] = React.useState(null);
-    if (!role) {
+    if (!user?.result?.role) {
         return (
             <ClientFoodPage />
         )

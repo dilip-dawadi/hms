@@ -3,8 +3,8 @@ import axios from 'axios';
 const API = axios.create({ baseURL: 'http://localhost:5000/' });
 
 API.interceptors.request.use((req) => {
-  if (localStorage.getItem('token')) {
-    req.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  if (localStorage.getItem('profile')) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
   }
   return req;
 });
@@ -19,6 +19,8 @@ export const singleUser = (id) => API.get(`/user/singleuser/${id}`);
 export const updateSingleUser = (id, formData) => API.patch(`/user/updatesingleuser/${id}`, formData);
 
 export const deleteUser = (id) => API.delete(`/user/deleteuser/${id}`);
+
+export const addCart = (formData) => API.patch(`/user/addcart`, formData);
 
 // fetch homePage
 export const getHomePage = () => API.get(`/homepage`);

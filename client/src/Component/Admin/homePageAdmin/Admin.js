@@ -5,9 +5,9 @@ import { Grow, Grid, Paper } from '@material-ui/core';
 import ClientHomePost from '../../Client/homePage/homePost'
 import Drawer from '../Drawer/drawer.js';
 const AdminPage = () => {
-    const role = JSON.parse(localStorage.getItem('profile'))
+    const user = JSON.parse(localStorage.getItem('profile'))
     const [updateHomeCurrentId, setupdateHomeCurrentId] = React.useState(null);
-    if (!role) {
+    if (!user?.result?.role) {
         return (
             <ClientHomePost />
         )
