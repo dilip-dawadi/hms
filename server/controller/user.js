@@ -115,7 +115,6 @@ export const deleteUser = async (req, res) => {
 }
 
 export const addCart = async (req, res) => {
-    console.log(req.body);
     try {
         const user = await User.findById(req.userId)
         if (!user) return res.status(400).json({ message: "User does not exist." })
@@ -123,8 +122,7 @@ export const addCart = async (req, res) => {
         await User.findOneAndUpdate({ _id: req.userId }, {
             cart: req.body
         })
-
-        return res.json({ message: "Added to cart" })
+        res.status(200).json({ message: "Cart Added" })
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }

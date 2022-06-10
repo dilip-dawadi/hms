@@ -7,6 +7,7 @@ import AddToCart from './Component/Client/UserDetail/addToCart/addToCart';
 import HomePageForm from './Component/Admin/homePageAdmin/Admin';
 import FoodPage from './Component/Admin/foodPageAdmin/foodAdmin';
 const App = () => {
+  const user = JSON.parse(localStorage.getItem('profile'));
   return (
     <BrowserRouter>
       <React.StrictMode>
@@ -22,7 +23,7 @@ const App = () => {
             <Route path="/" exact element={<Navigate to="/home" />} />
             <Route path="/auth" exact element={<Auth />} />
             <Route path="/profile" element={<UserDetail />} />
-            <Route path="/cart" element={<AddToCart />} />
+            {!user?.result?.role ? <Route path="/cart" element={<AddToCart />} /> : <Route path="/payment" element={<AddToCart />} />}
           </Routes>
         </Container>
       </React.StrictMode>

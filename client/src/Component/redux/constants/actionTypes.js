@@ -19,3 +19,6 @@ export const START_FOODPAGE = 'START_FOODPAGE';
 export const END_FOODPAGE = 'END_FOODPAGE';
 export const DELETE_FOODPAGE = "DELETE_FOODPAGE";
 export const UPDATE_FOODPAGE = "UPDATE_FOODPAGE";
+
+// payment
+export const FETCH_PAYMENT_FOOD = 'FETCH_PAYMENT_FOOD';

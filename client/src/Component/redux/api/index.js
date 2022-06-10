@@ -32,3 +32,7 @@ export const getFoodPage = () => API.get(`/foodpage`);
 export const createFoodPage = (formData) => API.post(`/foodpage`, formData);
 export const deleteFood = (id) => API.delete(`/foodpage/deletefood/${id}`)
 export const updateFoodPage = (id, formData) => API.patch(`/foodpage/${id}`, formData);
+
+// fetch Payment
+export const getPayment = () => API.get(`/payment`);
+export const createPayment = (formData) => API.post(`/payment`, formData);

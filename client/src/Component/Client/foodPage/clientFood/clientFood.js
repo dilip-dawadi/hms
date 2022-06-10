@@ -23,7 +23,6 @@ const ClientFoodView = () => {
   const dispatch = useDispatch();
   const { foodPageData } = useSelector((state) => state.foodPage);
   const [disable, setdisable] = React.useState(false);
-  console.log(disable);
   const { AsingleUser } = useSelector(state => state.Auth);
   const user = JSON.parse(localStorage.getItem("profile"));
   useEffect(() => {
@@ -45,10 +44,9 @@ const ClientFoodView = () => {
         alignItems="stretch"
         spacing={2}
       >
-        {/* reverse foodPage */}
         {foodPageData.slice(0, 4).map((foodData) =>
         (
-          < Grid item xs={12} sm={6} md={4} lg={3} >
+          < Grid item xs={12} sm={6} md={4} lg={3}>
             <Card className={classes.card} key={foodData._id} raised elevation={3}>
               <ButtonBase
                 component="span"
@@ -167,7 +165,7 @@ const ClientFoodView = () => {
               </div>
               <CardActions className={classes.cardActionsI}>
                 <Button size="small" className={classes.btn} type="button" onClick={
-                  () => {
+                  async () => {
                     if (user) {
                       const check = AsingleUser.cart.every(item => {
                         return item._id !== foodData._id
@@ -177,9 +175,9 @@ const ClientFoodView = () => {
                         setdisable(true);
                         setTimeout(() => {
                           setdisable(false);
-                        }, 2000);
-                        dispatch(singleUser(user?.result?._id));
-                        dispatch(addCart(cart, foodData));
+                        }, 4000);
+                        await dispatch(addCart(cart, foodData));
+                        await dispatch(singleUser(user?.result?._id));
                       } else {
                         NotifyError("Item Already Added");
                       }
@@ -188,7 +186,7 @@ const ClientFoodView = () => {
                     }
 
                   }} disabled={disable} >
-                  Learn More
+                  Add To Cart
                 </Button>
               </CardActions>
             </Card>
