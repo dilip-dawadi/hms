@@ -28,7 +28,8 @@ export const createHomePage = (formData) => API.post(`/homepage`, formData);
 export const deleteHome = (id) => API.delete(`/homepage/deletehome/${id}`)
 export const updateHomePage = (id, formData) => API.patch(`/homepage/${id}`, formData);
 // fetch foodPage
-export const getFoodPage = () => API.get(`/foodpage`);
+export const getFoodPage = (foodquery) => API.get(`/foodpage?page=${foodquery.page}&limit=${foodquery.limit}&sort=${foodquery.sort}`);
+export const getFoodBySearch = ({ search, tags }) => API.get(`/foodpage/search?searchFood=${search || 'none'}&tags=${tags}`);
 export const createFoodPage = (formData) => API.post(`/foodpage`, formData);
 export const deleteFood = (id) => API.delete(`/foodpage/deletefood/${id}`)
 export const updateFoodPage = (id, formData) => API.patch(`/foodpage/${id}`, formData);

@@ -6,6 +6,7 @@ import UserDetail from './Component/Client/UserDetail/userProfile';
 import AddToCart from './Component/Client/UserDetail/addToCart/addToCart';
 import HomePageForm from './Component/Admin/homePageAdmin/Admin';
 import FoodPage from './Component/Admin/foodPageAdmin/foodAdmin';
+import NavBar from './Component/Navbarnfooter/navBar/navBar';
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
   return (
@@ -16,7 +17,7 @@ const App = () => {
           padding: '0px',
           overflow: 'hidden',
         }} >
-
+          <NavBar />
           <Routes>
             <Route path="/home" element={<HomePageForm />} />
             <Route path="/food" element={<FoodPage />} />

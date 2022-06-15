@@ -54,7 +54,9 @@ const HomePageForm = ({ setupdateFoodCurrentId, updateFoodCurrentId }) => {
     const upload = () => {
         if (!image.selectedFile) return;
         const sotrageRef = ref(storage, `files/${image.selectedFile.name}`);
+        console.log(sotrageRef, 'check');
         const uploadTask = uploadBytesResumable(sotrageRef, image.selectedFile);
+        console.log(uploadTask, 'check');
 
         uploadTask.on(
             "state_changed",

@@ -12,12 +12,16 @@ import {
 import useStyles from "./clientFoodStyle";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { fetchFoodPage } from "../../../redux/actions/foodPageaction";
 import { addCart, singleUser } from "../../../redux/actions/Auth";
 import { NotifyError } from "../../../redux/actions/notify";
 import FoodHeaderPage from "./FoodHeaderPage";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import moment from "moment";
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const ClientFoodView = () => {
   const dispatch = useDispatch();
@@ -25,14 +29,23 @@ const ClientFoodView = () => {
   const [disable, setdisable] = React.useState(false);
   const { AsingleUser } = useSelector(state => state.Auth);
   const user = JSON.parse(localStorage.getItem("profile"));
+  const query = useQuery();
+  const page = query.get('page');
+  const limit = query.get('limit');
+  const sort = query.get('sort');
+  const foodquery = {
+    page: page ? Number(page) : 1,
+    limit: limit ? Number(limit) : 4,
+    sort: sort ? sort : "createdAt",
+  };
   useEffect(() => {
     return () => {
-      dispatch(fetchFoodPage());
+      dispatch(fetchFoodPage(foodquery));
       if (user) {
         dispatch(singleUser(user?.result._id));
       }
     };
-  }, [dispatch]);
+  }, [dispatch, limit, page, sort]);
 
   const classes = useStyles();
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { fetchFoodPage, deleteFood } from '../../../redux/actions/foodPageaction';
 import useStyles from './foodPagePostStyle';
 import { CircularProgress } from '@mui/material';
@@ -8,12 +9,24 @@ import { Typography, Paper, Divider, CardActions, Button } from '@material-ui/co
 import moment from 'moment';
 import Delete from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 function FoodPostAdmin({ setupdateFoodCurrentId }) {
     const dispatch = useDispatch();
     const { isLoading, foodPageData } = useSelector((state) => state.foodPage);
+    const query = useQuery();
+    const page = query.get('page');
+    const limit = query.get('limit');
+    const sort = query.get('sort');
+    const foodquery = {
+        page: page ? Number(page) : 1,
+        limit: limit ? Number(limit) : 4,
+        sort: sort ? sort : "createdAt",
+    };
     useEffect(() => {
         return () => {
-            dispatch(fetchFoodPage());
+            dispatch(fetchFoodPage(foodquery));
         }
     }, [dispatch]);
     const classes = useStyles();

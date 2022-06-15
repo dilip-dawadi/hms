@@ -23,9 +23,9 @@ export const signin = async (req, res) => {
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id, role: existingUser.role }, process.env.JWT, { expiresIn: '1d' });
         if (existingUser.role === 1) {
-            res.status(200).json({ result: { role: existingUser.role, _id: existingUser._id }, token, message: `Welcome Admin, ${existingUser.name.split(" ")[0]}` });
+            res.status(200).json({ result: { role: existingUser.role, _id: existingUser._id, cart: existingUser.cart, selectedFile: existingUser.selectedFile }, token, message: `Welcome Admin, ${existingUser.name.split(" ")[0]}` });
         } else {
-            res.status(200).json({ result: { role: existingUser.role, _id: existingUser._id }, token, message: `Welcome Back!, ${existingUser.name.split(" ")[0]}` });
+            res.status(200).json({ result: { role: existingUser.role, _id: existingUser._id, cart: existingUser.cart, selectedFile: existingUser.selectedFile }, token, message: `Welcome Back!, ${existingUser.name.split(" ")[0]}` });
         }
     } catch (err) {
         res.status(500).json({ message: err.message })
