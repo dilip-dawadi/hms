@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { fetchFoodPage, deleteFood } from '../../../redux/actions/foodPageaction';
 import useStyles from './foodPagePostStyle';
 import { CircularProgress } from '@mui/material';
-import { Typography, Paper, Divider, CardActions, Button } from '@material-ui/core';
+import { Typography, Paper, Divider, CardActions, Button, Grid } from '@material-ui/core';
 import moment from 'moment';
 import Delete from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
@@ -31,15 +31,19 @@ function FoodPostAdmin({ setupdateFoodCurrentId }) {
     }, [dispatch]);
     const classes = useStyles();
     return (
-        isLoading ? <CircularProgress style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: '999',
-            width: '100px',
-            height: '100px'
-        }} /> :
+        isLoading ? <Grid container style={{
+            padding: '0px',
+            margin: '0px',
+        }}>
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px', height: '100vh' }}>
+                <div style={{
+                    color: 'white',
+                    fontSize: '30px',
+                    fontWeight: 'bold',
+                    letterSpacing: '3px',
+                }}>Loading</div>
+            </div>
+        </Grid> :
             (<div style={{ borderRadius: "15px", padding: "80px 15px 20px 15px" }}>
                 {foodPageData?.map((foodData) => (
                     <Paper key={foodData?._id} elevation={3} style={{ borderRadius: "12px", margin: '10px auto' }}>

@@ -67,8 +67,10 @@ export default function SimpleMenu() {
 
                         {aUser ?
                             <Paper elevation={5} style={{
-                                backgroundColor: 'rgb(32, 51, 85)',
+                                backgroundColor: 'transparent',
                                 borderRadius: '10px',
+                                border: '1px solid #fff',
+                                padding: '10px',
                             }}>
                                 <CardHeader
                                     avatar={
@@ -89,13 +91,16 @@ export default function SimpleMenu() {
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                    margin: 'auto'
+                                    margin: 'auto',
                                 }} >
                                     <CardMedia
                                         component="img"
                                         height="300"
                                         image={aUser?.selectedFile}
                                         alt="Paella dish"
+                                        style={{
+                                            borderRadius: '20px',
+                                        }}
                                     />
                                 </div>
                                 <CardContent style={{
@@ -103,7 +108,7 @@ export default function SimpleMenu() {
                                     gridTemplateColumns: '1fr 1fr',
                                     gridGap: '20px',
                                     color: 'white',
-                                    backgroundColor: 'rgb(32, 51, 85)',
+                                    backgroundColor: 'transparent',
                                 }} >
                                     <Typography variant="body2" component="p">
                                         <b>Name:</b> {aUser?.name}
@@ -118,8 +123,9 @@ export default function SimpleMenu() {
                                         <b>Address:</b> {aUser?.address}
                                     </Typography>
                                     <IconButton aria-label="add to favorites" style={{
-                                        backgroundColor: 'rgb(32, 41, 75)',
+                                        backgroundColor: 'transparent',
                                         borderRadius: '500px',
+                                        border: '1px solid white',
                                     }} onClick={logout} >
                                         <LogoutIcon style={{
                                             color: 'white',
@@ -127,7 +133,8 @@ export default function SimpleMenu() {
                                     </IconButton>
                                     <EditUser openM={openM} setOpenM={setOpenM} aUser={aUser} />
                                     <IconButton aria-label="share" style={{
-                                        backgroundColor: 'rgb(32, 41, 75)',
+                                        backgroundColor: 'transparent',
+                                        border: '1px solid white',
                                         borderRadius: '500px',
                                     }} onClick={delUser}>
                                         <DeleteIcon sx={{ color: 'white' }} />

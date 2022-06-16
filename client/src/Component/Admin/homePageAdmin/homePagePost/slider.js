@@ -35,15 +35,19 @@ function Slider({ setupdateHomeCurrentId }) {
     return (
         <Grid container>
             <Grid item xs={12} sm={12} md={12}>
-                {isLoading ? <CircularProgress style={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: '999',
-                    width: '100px',
-                    height: '100px'
-                }} /> :
+                {isLoading ? <Grid container style={{
+                    padding: '0px',
+                    margin: '0px',
+                }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px', height: '100vh' }}>
+                        <div style={{
+                            color: 'white',
+                            fontSize: '30px',
+                            fontWeight: 'bold',
+                            letterSpacing: '3px',
+                        }}>Loading</div>
+                    </div>
+                </Grid> :
                     <AutoPlaySwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                         interval={10000}
