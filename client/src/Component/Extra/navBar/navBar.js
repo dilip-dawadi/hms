@@ -22,55 +22,51 @@ import { LOGOUT } from '../../redux/constants/actionTypes';
 
 const pages = ['home', 'food', 'room', 'contact'];
 const ResponsiveAppBar = () => {
+    const { AsingleUser } = useSelector((state) => state.Auth);
     const location = useLocation();
     const dispatch = useDispatch();
-    const { AsingleUser } = useSelector((state) => state.Auth);
     const [aUser, setaUser] = React.useState();
     const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
+    React.useEffect(() => {
+        return () => {
+            dispatch(singleUser(user?.result?._id));
+        }
+    }, [dispatch]);
+    const logout = () => {
+        dispatch({ type: LOGOUT });
+        setUser(null);
+        navigate('/auth');
+    }
+    React.useEffect(() => {
+        const token = user?.token;
+        console.log('hello');
+        return () => {
+            if (token) {
+                const decodedToken = decode(token);
 
+                if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+            }
+            setUser(JSON.parse(localStorage.getItem('profile')));
+        }
+    }, [user?.token]);
+    React.useEffect(() => {
+        setaUser(AsingleUser);
+    }, [AsingleUser, dispatch]);
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
-
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
-
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-    const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
-
-    const logout = () => {
-        dispatch({ type: LOGOUT });
-        setUser(null);
-        window.location.href = '/auth';
-    }
-    React.useEffect(() => {
-        return () => {
-            if (user) {
-                dispatch(singleUser(user?.result?._id));
-            }
-        }
-    }, [dispatch, user]);
-    React.useEffect(() => {
-        const token = user?.token;
-        if (token) {
-            const decodedToken = decode(token);
-
-            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
-        }
-        setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [location]);
-
-    React.useEffect(() => {
-        setaUser(AsingleUser);
-    }, [AsingleUser, dispatch]);
 
     return (
         <AppBar position="fixed" style={{
@@ -188,7 +184,7 @@ const ResponsiveAppBar = () => {
                                     marginRight: '3rem',
                                     padding: '0.4rem 1.4rem',
                                 }}>
-                                    Sign
+                                    Sign In
                                 </MenuItem>
                             </NavLink>
                         </Tooltip>}

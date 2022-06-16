@@ -8,7 +8,13 @@ const CssTextField = styled(TextField)({
     color: 'white',
     margin: '-9px 0px',
   },
+  '& label.Mui-focused:after': {
+    borderColor: 'green',
+  },
   '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: 'gray',
+    },
     '&.Mui-focused fieldset': {
       borderColor: 'gray',
       borderWidth: '1px',

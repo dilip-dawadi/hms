@@ -25,11 +25,9 @@ export default function SimpleMenu() {
 
     useEffect(() => {
         return () => {
-            if (user) {
-                dispatch(singleUser(user?.result?._id));
-            }
+            dispatch(singleUser(user?.result?._id));
         }
-    }, [dispatch, user]);
+    }, [dispatch]);
     useEffect(() => {
         setaUser(AsingleUser);
     }, [AsingleUser, dispatch]);
@@ -47,7 +45,7 @@ export default function SimpleMenu() {
     const logout = () => {
         dispatch({ type: LOGOUT });
         setUser(null);
-        window.location.href = '/auth';
+        navigate('/auth');
     };
     return (
         user ?
@@ -66,10 +64,11 @@ export default function SimpleMenu() {
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px', height: '100vh' }}>
 
                         {aUser ?
-                            <Paper elevation={5} style={{
-                                backgroundColor: 'transparent',
+                            <Paper elevation={10} style={{
+                                // backgroundColor: 'transparent',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                backgroundBlendMode: 'darken',
                                 borderRadius: '10px',
-                                border: '1px solid #fff',
                                 padding: '10px',
                             }}>
                                 <CardHeader
@@ -124,21 +123,21 @@ export default function SimpleMenu() {
                                     </Typography>
                                     <IconButton aria-label="add to favorites" style={{
                                         backgroundColor: 'transparent',
-                                        borderRadius: '500px',
+                                        borderRadius: '50px',
                                         border: '1px solid white',
                                     }} onClick={logout} >
                                         <LogoutIcon style={{
                                             color: 'white',
                                         }} />
                                     </IconButton>
-                                    <EditUser openM={openM} setOpenM={setOpenM} aUser={aUser} />
                                     <IconButton aria-label="share" style={{
                                         backgroundColor: 'transparent',
                                         border: '1px solid white',
-                                        borderRadius: '500px',
+                                        borderRadius: '50px',
                                     }} onClick={delUser}>
                                         <DeleteIcon sx={{ color: 'white' }} />
                                     </IconButton>
+                                    <EditUser openM={openM} setOpenM={setOpenM} aUser={aUser} />
                                 </CardContent>
                             </Paper> : <div style={{
                                 color: 'white',

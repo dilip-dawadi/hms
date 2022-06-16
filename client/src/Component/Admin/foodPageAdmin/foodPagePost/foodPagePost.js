@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { fetchFoodPage, deleteFood } from '../../../redux/actions/foodPageaction';
 import useStyles from './foodPagePostStyle';
-import { CircularProgress } from '@mui/material';
 import { Typography, Paper, Divider, CardActions, Button, Grid } from '@material-ui/core';
 import moment from 'moment';
 import Delete from '@mui/icons-material/Delete';
@@ -52,6 +51,7 @@ function FoodPostAdmin({ setupdateFoodCurrentId }) {
                                 <div className={classes.section1}>
                                     <div className={classes.imageSection}>
                                         <img
+                                            alt={foodData?.title}
                                             className={classes.media}
                                             src={foodData?.selectedFile}
                                             title={foodData?.title}

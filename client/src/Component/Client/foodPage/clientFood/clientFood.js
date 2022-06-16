@@ -45,7 +45,7 @@ const ClientFoodView = () => {
         dispatch(singleUser(user?.result._id));
       }
     };
-  }, [dispatch, limit, page, sort]);
+  }, [dispatch]);
 
   const classes = useStyles();
   return (

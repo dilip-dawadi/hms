@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Paper, Grid } from '@material-ui/core';
+import { TextField, Button, Typography, Grid } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './HomePageFormStyle';
 import { createHomePage, updateHomePage } from '../../../redux/actions/homePage';

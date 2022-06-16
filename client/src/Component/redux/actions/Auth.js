@@ -1,5 +1,5 @@
 // this file help to get data from mongoodb
-import { AUTH, FETCH_SINGLEUSER, UPDATE_SINGLE_USER, LOGOUT } from "../constants/actionTypes";
+import { AUTH, FETCH_SINGLEUSER, UPDATE_SINGLE_USER } from "../constants/actionTypes";
 import * as api from '../api'
 import { NotifyError, NotifySuccess } from "./notify";
 

@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchHomePage, deleteHome } from '../../../redux/actions/homePage';
 import useStyles from './style';
-import { CircularProgress } from '@mui/material';
 import { Typography, Grid, CardMedia, Button } from '@material-ui/core';
 import Delete from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';

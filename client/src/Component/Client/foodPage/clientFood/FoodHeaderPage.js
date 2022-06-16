@@ -1,7 +1,7 @@
 import React from 'react'
 import { CardMedia, Typography, TextField, Select, MenuItem, FormControl, InputLabel } from '@material-ui/core'
 import useStyle from './FoodHeaderPageStyle'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getFoodBySearch, fetchFoodPage } from '../../../redux/actions/foodPageaction';
 
