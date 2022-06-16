@@ -72,6 +72,7 @@ const ResponsiveAppBar = () => {
         <AppBar position="fixed" style={{
             backgroundColor: 'transparent',
             // boxShadow: 'none',
+            backgroundBlendMode: 'darken',
             zIndex: '100',
         }}>
             <Container maxWidth="xl" sx={{
@@ -93,6 +94,12 @@ const ResponsiveAppBar = () => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
+                            '@media (max-width: 600px)': {
+                                fontSize: '1rem',
+                            },
+                            '@media (max-width: 350px)': {
+                                fontSize: '0.8rem',
+                            },
                         }}
                     >
                         Prabandak
@@ -174,7 +181,7 @@ const ResponsiveAppBar = () => {
                                 textDecoration: 'none',
                                 color: 'White',
                             }}>
-                                <MenuItem key={'auth'} onClick={handleCloseUserMenu} style={{
+                                <MenuItem key={'auth'} onClick={handleCloseUserMenu} sx={{
                                     fontWeight: 600,
                                     letterSpacing: '3px',
                                     textTransform: 'uppercase',
@@ -183,6 +190,22 @@ const ResponsiveAppBar = () => {
                                     border: '1px solid white',
                                     marginRight: '3rem',
                                     padding: '0.4rem 1.4rem',
+                                    '@media (max-width: 600px)': {
+                                        fontSize: '0.9rem',
+                                        marginRight: '2rem',
+                                        minHeight: 'auto',
+                                        padding: '0.4rem 1.2rem',
+                                    },
+                                    '@media (max-width: 400px)': {
+                                        fontSize: '0.8rem',
+                                        marginRight: '1rem',
+                                        padding: '0.4rem 1rem',
+                                    },
+                                    '@media (max-width: 350px)': {
+                                        fontSize: '0.8rem',
+                                        marginRight: '0.2rem',
+                                        padding: '0.3rem 0.8rem',
+                                    }
                                 }}>
                                     Sign In
                                 </MenuItem>

@@ -42,7 +42,7 @@ export default makeStyles((theme) => ({
     paddingRight: theme.spacing(3),
     margin: theme.spacing(3),
     backgroundColor: 'transparent',
-    backgroundBlendMode: 'darken',
+    border: '1px solid #17253e',
   },
   paper1: {
     maxWidth: '400px',
@@ -51,7 +51,7 @@ export default makeStyles((theme) => ({
     margin: theme.spacing(2),
     // backgroundColor: '#17253e',
     backgroundColor: 'transparent',
-    backgroundBlendMode: 'darken',
+    border: '1px solid #17253e',
   },
   avatar: {
     margin: theme.spacing(1),
