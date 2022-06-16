@@ -7,8 +7,7 @@ const authReducer = (state = { authData: null }, action) => {
       return { ...state, authData: action.data };
     case actionType.LOGOUT:
       localStorage.removeItem('profile')
-      return { ...state, authData: null };
-
+      return { ...state, authData: null, AsingleUser: null };
     case actionType.FETCH_SINGLEUSER:
       return { ...state, AsingleUser: { ...action.payload.singleUser } };
 

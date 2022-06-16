@@ -6,7 +6,8 @@ import UserDetail from './Component/Client/UserDetail/userProfile';
 import AddToCart from './Component/Client/UserDetail/addToCart/addToCart';
 import HomePageForm from './Component/Admin/homePageAdmin/Admin';
 import FoodPage from './Component/Admin/foodPageAdmin/foodAdmin';
-import NavBar from './Component/Navbarnfooter/navBar/navBar';
+import NavBar from './Component/Extra/navBar/navBar';
+import PageNotFound from './Component/Extra/pageNotFound';
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="/auth" exact element={<Auth />} />
             <Route path="/profile" element={<UserDetail />} />
             {!user?.result?.role ? <Route path="/cart" element={<AddToCart />} /> : <Route path="/payment" element={<AddToCart />} />}
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Container>
       </React.StrictMode>

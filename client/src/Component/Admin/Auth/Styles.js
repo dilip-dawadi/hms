@@ -13,7 +13,7 @@ export default makeStyles((theme) => ({
   },
   Style: {
     marginTop: '20px',
-    height: '100vh',
+    height: '102vh',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -22,7 +22,7 @@ export default makeStyles((theme) => ({
       marginTop: '100px',
     },
     [theme.breakpoints.down('sm')]: {
-      marginTop: '60px',
+      marginTop: '80px',
       height: '140vh',
     }
   },
@@ -41,59 +41,35 @@ export default makeStyles((theme) => ({
     paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
     margin: theme.spacing(3),
-
+    backgroundColor: '#17253e',
   },
   paper1: {
     maxWidth: '400px',
     borderRadius: '0.5rem',
     padding: theme.spacing(2),
     margin: theme.spacing(2),
-
-  },
-  Error: {
-    color: 'white',
-    fontSize: '12px',
-    fontStyle: 'bold',
-    letterSpacing: '1px',
-    textAlign: 'center',
-    marginTop: '5px',
-    padding: '12px 5px 12px 5px',
-    backgroundColor: '#595775',
-    borderRadius: '5px',
-  },
-  success: {
-    color: 'white',
-    fontSize: '12px',
-    fontStyle: 'bold',
-    letterSpacing: '1px',
-    textAlign: 'center',
-    marginTop: '5px',
-    borderRadius: '5px',
-    padding: '12px 5px 12px 5px',
-    backgroundColor: '#17a2b8',
+    backgroundColor: '#17253e',
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: '#595775',
+    backgroundColor: 'rgb(32 51 85)',
   },
   formData: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
-  label: {
-    color: "black"
-  },
   submit: {
     margin: theme.spacing(1, 0, 0),
-    backgroundColor: '#595775',
+    backgroundColor: 'rgb(32 51 85)',
     color: 'white',
-    letterSpacing: '2px',
+    letterSpacing: '3px',
     padding: '0.4rem 0.7rem',
-    letterSpacing: '2px',
     fontSize: '15px',
-    marginTop: theme.spacing(1),
+    fontWeight: 'bold',
+    marginTop: theme.spacing(2),
     '&:hover': {
-      backgroundColor: '#595775',
+      // backgroundColor: '#595775',
+      backgroundColor: 'rgb(32 51 85)',
       color: 'white',
     }
   },

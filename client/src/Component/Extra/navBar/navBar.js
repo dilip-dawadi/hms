@@ -13,16 +13,19 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector, useDispatch } from 'react-redux';
+import { singleUser } from '../../redux/actions/Auth';
 import decode from 'jwt-decode';
 import { LOGOUT } from '../../redux/constants/actionTypes';
 
 const pages = ['home', 'food', 'room', 'contact'];
-
 const ResponsiveAppBar = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const { AsingleUser } = useSelector((state) => state.Auth);
+    const [aUser, setaUser] = React.useState();
     const navigate = useNavigate();
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -42,22 +45,32 @@ const ResponsiveAppBar = () => {
         setAnchorElUser(null);
     };
     const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
+
     const logout = () => {
         dispatch({ type: LOGOUT });
-        navigate('/auth');
         setUser(null);
-    };
+        window.location.href = '/auth';
+    }
+    React.useEffect(() => {
+        return () => {
+            if (user) {
+                dispatch(singleUser(user?.result?._id));
+            }
+        }
+    }, [dispatch, user]);
     React.useEffect(() => {
         const token = user?.token;
-
         if (token) {
             const decodedToken = decode(token);
 
             if (decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
-
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location]);
+
+    React.useEffect(() => {
+        setaUser(AsingleUser);
+    }, [AsingleUser, dispatch]);
 
     return (
         <AppBar position="fixed" style={{
@@ -119,16 +132,19 @@ const ResponsiveAppBar = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <NavLink to={`${page}`} textAlign="center" style={{
-                                        textDecoration: 'none',
-                                        margin: 'auto',
+                                <NavLink to={`${page}`} key={page} style={{
+                                    textDecoration: 'none',
+                                }}>
+                                    <MenuItem onClick={handleCloseNavMenu} style={{
                                         color: 'black',
                                         fontWeight: 300,
-                                        letterSpacing: '2px',
+                                        fontSize: '1.1rem',
+                                        marginTop: '0.5rem',
+                                        letterSpacing: '3px',
                                         textTransform: 'uppercase',
-                                    }}>{page}</NavLink>
-                                </MenuItem>
+                                    }}>
+                                        {page}
+                                    </MenuItem></NavLink>
                             ))}
                         </Menu>
                     </Box>
@@ -136,45 +152,50 @@ const ResponsiveAppBar = () => {
                         paddingLeft: '7rem',
                     }}>
                         {pages.map((page) => (
-                            <MenuItem key={page} onClick={handleCloseNavMenu} style={{
+                            <NavLink to={`${page}`} key={page} textalign="center" style={{
                                 marginRight: '4rem',
+                                textDecoration: 'none',
+                            }}><MenuItem onClick={handleCloseNavMenu} style={{
+                                color: 'white',
+                                fontWeight: 600,
+                                letterSpacing: '2px',
+                                fontSize: '1rem',
+                                textTransform: 'uppercase',
                             }}>
-                                <NavLink to={`${page}`} textAlign="center" style={{
-                                    textDecoration: 'none',
-                                    color: 'white',
-                                    fontWeight: 600,
-                                    letterSpacing: '2px',
-                                    fontSize: '1rem',
-                                    textTransform: 'uppercase',
-                                }}>{page}</NavLink>
-                            </MenuItem>
+                                    {page}
+                                </MenuItem></NavLink>
                         ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
 
                         {user ? <Tooltip title="Open Profile"><IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="A" src={`${user?.result?.selectedFile}`} style={{
-                                backgroundColor: 'black',
+                            <Avatar alt={`${aUser?.name}`} src={`${aUser?.selectedFile}`} style={{
+                                backgroundColor: 'rgb(32 51 85)',
                             }} />
-                        </IconButton></Tooltip> : <Tooltip title="Login"><MenuItem key={'auth'} onClick={handleCloseUserMenu} style={{
-                            backgroundColor: '#595775',
-                            borderRadius: '10%',
-                            marginRight: '3rem',
-                            padding: '0.4rem 1.4rem',
-                        }}>
+                        </IconButton></Tooltip> : <Tooltip title="Login">
                             <NavLink to='/auth' style={{
                                 textDecoration: 'none',
                                 color: 'White',
-                                fontWeight: 600,
-                                letterSpacing: '3px',
-                                textTransform: 'uppercase',
-                            }}>Sign</NavLink>
-                        </MenuItem></Tooltip>}
+                            }}>
+                                <MenuItem key={'auth'} onClick={handleCloseUserMenu} style={{
+                                    fontWeight: 600,
+                                    letterSpacing: '3px',
+                                    textTransform: 'uppercase',
+                                    backgroundColor: 'transparent',
+                                    borderRadius: '5%',
+                                    border: '1px solid white',
+                                    marginRight: '3rem',
+                                    padding: '0.4rem 1.4rem',
+                                }}>
+                                    Sign
+                                </MenuItem>
+                            </NavLink>
+                        </Tooltip>}
 
                         {user &&
                             <Menu
-                                sx={{ mt: '45px' }}
+                                sx={{ mt: '45px', }}
                                 id="menu-appbar"
                                 anchorEl={anchorElUser}
                                 anchorOrigin={{
@@ -189,24 +210,42 @@ const ResponsiveAppBar = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                <MenuItem key={'profile'} onClick={handleCloseUserMenu}>
-                                    <NavLink to='profile' style={{
-                                        textDecoration: 'none',
-                                        color: 'black',
-                                        fontWeight: 300,
-                                        letterSpacing: '1px',
-                                        textTransform: 'capitalize',
-                                    }}>profile</NavLink>
-                                </MenuItem>
-                                <MenuItem key={'Logout'} onClick={handleCloseUserMenu}>
-                                    <Button style={{
-                                        textDecoration: 'none',
-                                        color: 'black',
-                                        fontWeight: 300,
-                                        letterSpacing: '1px',
-                                        textTransform: 'capitalize',
-                                    }} onClick={logout}>Logout</Button>
-                                </MenuItem>
+                                <NavLink to='profile' style={{
+                                    textDecoration: 'none',
+                                    color: 'black',
+                                    margin: 'auto',
+                                }}>
+                                    <Tooltip title="Profile">
+                                        <MenuItem key={'profile'} onClick={handleCloseUserMenu} style={{
+                                            fontWeight: 300,
+                                            letterSpacing: '2px',
+                                            fontSize: '1.1rem',
+                                            marginLeft: '0.4rem',
+                                            textTransform: 'capitalize',
+                                            margin: 'auto',
+                                        }}>
+                                            <PermIdentityIcon style={{
+                                                textAlign: 'center',
+                                                margin: 'auto',
+                                                color: 'rgb(32, 41, 75)',
+                                            }} />
+                                        </MenuItem></Tooltip></NavLink>
+                                <Button style={{
+                                    textDecoration: 'none',
+                                    color: 'black',
+                                }} onClick={logout}>
+                                    <Tooltip title="Logout">
+                                        <MenuItem key={'Logout'} onClick={handleCloseUserMenu} style={{
+                                            fontWeight: 300,
+                                            letterSpacing: '2px',
+                                            textTransform: 'capitalize',
+                                        }}>
+                                            <LogoutIcon style={{
+                                                textAlign: 'center',
+                                                margin: 'auto',
+                                                color: 'rgb(32, 41, 75)',
+                                            }} />
+                                        </MenuItem></Tooltip></Button>
                             </Menu>}
                     </Box>
                 </Toolbar>

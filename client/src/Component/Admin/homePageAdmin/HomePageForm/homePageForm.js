@@ -70,7 +70,7 @@ const HomePageForm = ({ updateHomeCurrentId, setupdateHomeCurrentId }) => {
     return (
         <>
             <Typography variant="h6" className={classes.title} >Home Page Details</Typography>
-            <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit} >
+            <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Grid container spacing={3} item sm={6} md={6} >
                     <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({ ...postData, title: e.target.value })} className={classes.TextField} />
                     <TextField name="Description" variant="outlined" label="Description" fullWidth multiline minRows={3} value={postData.description} onChange={(e) => setPostData({ ...postData, description: e.target.value })} className={classes.TextField} />

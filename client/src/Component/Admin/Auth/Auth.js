@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { signin, signup } from '../../redux/actions/Auth';
@@ -42,6 +42,7 @@ const SignUp = () => {
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setProgress("Upload is " + progress + "% done");
+        // eslint-disable-next-line default-case
         switch (snapshot.state) {
           case "paused": // or 'paused'
             setProgress("Upload is paused");
@@ -72,14 +73,14 @@ const SignUp = () => {
   return (
     <Grid container className={isSignup ? classes.container : classes.container1}>
       <div style={isSignup ? {
-        backgroundImage: 'url(/prabandhak2.png)',
+        backgroundImage: 'url(/prabandhak.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         height: '100%',
         width: '100%',
       } : {
-        backgroundImage: 'url(/prabandhak2.png)',
+        backgroundImage: 'url(/prabandhak.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -96,7 +97,9 @@ const SignUp = () => {
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>
-              <Typography component="h1" variant="h5" style={{ letterSpacing: '2px', fontWeight: "500", textTransform: 'uppercase' }}>{isSignup ? 'Sign up' : 'Sign in'}</Typography>
+              <Typography component="h1" variant="h5" style={{
+                letterSpacing: '2px', fontWeight: 600, textTransform: 'uppercase', color: 'white'
+              }}>{isSignup ? 'Sign up' : 'Sign in'}</Typography>
             </div>
             <form className={classes.formData} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
@@ -115,10 +118,10 @@ const SignUp = () => {
                   <div style={{ padding: '7px 0', width: '98%', margin: '20px auto', textAlign: 'center' }}>
                     <Typography variant="body1">{progress}</Typography>
                   </div> :
-                  <div style={{ textAlign: "center", display: 'inline-block' }} ><input style={{ padding: '20px 0px', marginLeft: "50px", width: '50%' }} type="file" id='selectedFile' name='selectedFile' onChange={(e) => setimage({ ...image, selectedFile: e.target.files[0] })} />
-                    <Button variant="contained" style={{ backgroundColor: '#595775', margin: '10px 1px', color: 'white', display: 'inline-block' }} size="large" onClick={upload}>Upload Image</Button></div> : null}
+                  <div style={{ textAlign: "center", display: 'inline-block' }} ><input style={{ padding: '20px 0px', marginLeft: "50px", width: '50%', color: 'white' }} type="file" id='selectedFile' name='selectedFile' onChange={(e) => setimage({ ...image, selectedFile: e.target.files[0] })} />
+                    <Button variant="contained" style={{ backgroundColor: 'rgb(32 51 85)', margin: '10px 1px', color: 'white', display: 'inline-block' }} size="large" onClick={upload}>Upload Image</Button></div> : null}
               </Grid>
-              <Button type="submit" fullWidth variant="contained" className={classes.submit}>
+              <Button type="submit" fullWidth variant="contained" className={classes.submit} style={isSignup ? { marginBottom: '10px' } : { marginBottom: '1px' }}>
                 {isSignup ? 'Sign Up' : 'Sign In'}
               </Button>
               <Grid container justifyContent="flex-end" style={{
@@ -126,7 +129,12 @@ const SignUp = () => {
                 padding: '0px',
               }}>
                 <Grid item>
-                  <Button onClick={switchMode}>
+                  <Button onClick={switchMode} style={isSignup ? {
+                    color: 'white',
+                    marginTop: '10px 1px',
+                    backgroundColor: 'rgb(32 51 85)',
+                    display: 'inline-block',
+                  } : { color: 'white', backgroundColor: 'rgb(32 51 85)', margin: '10px 1px', display: 'inline-block' }}>
                     {isSignup ? `Already have an account? Sign in` : "Don't have an account? Sign Up"}
                   </Button>
                 </Grid>

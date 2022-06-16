@@ -14,27 +14,40 @@ const AdminPage = () => {
     }
     return (
         <Grow in={true}>
-            <Grid container justifyContent="space-between" alignItems="stretch" style={{
-                backgroundImage: 'linear-gradient(to right, #fdfbfb, #ebedee)',
+            <Grid container style={{
                 padding: '0px',
                 margin: '0px',
-            }} spacing={0}>
-                <Grid item xs={3} sm={3} md={3}>
-                    <Drawer />
-                </Grid>
-                <Grid item xs={9} sm={9} md={9}>
-                    <Paper style={{
-                        margin: '0px',
+            }}>
+                <div style={{
+                    backgroundImage: 'url(/prabandhak.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    height: '100%',
+                    width: '100%',
+                }} >
+                    <Grid container justifyContent="space-between" alignItems="stretch" style={{
                         padding: '0px',
-                    }}>
-                        <Grid item xs={12} sm={12} md={12}>
-                            <HomePageForm updateHomeCurrentId={updateHomeCurrentId} setupdateHomeCurrentId={setupdateHomeCurrentId} />
+                        marginTop: '70px',
+                    }} spacing={0}>
+                        <Grid item xs={3} sm={3} md={3}>
+                            <Drawer />
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12}>
-                            <HomePagePost setupdateHomeCurrentId={setupdateHomeCurrentId} />
+                        <Grid item xs={9} sm={9} md={9}>
+                            <Paper style={{
+                                margin: '0px',
+                                padding: '0px',
+                            }}>
+                                <Grid item xs={12} sm={12} md={12}>
+                                    <HomePageForm updateHomeCurrentId={updateHomeCurrentId} setupdateHomeCurrentId={setupdateHomeCurrentId} />
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={12}>
+                                    <HomePagePost setupdateHomeCurrentId={setupdateHomeCurrentId} />
+                                </Grid>
+                            </Paper>
                         </Grid>
-                    </Paper>
-                </Grid>
+                    </Grid>
+                </div>
             </Grid>
         </Grow>
     )
