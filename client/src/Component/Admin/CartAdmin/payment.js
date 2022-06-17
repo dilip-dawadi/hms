@@ -4,18 +4,21 @@ import { useDispatch } from 'react-redux';
 import { Typography, Button, Grid } from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
-import { fetchPayment } from '../../redux/actions/paymentaction';
+import { fetchPayment, StatusPayment } from '../../redux/actions/paymentaction';
 import moment from 'moment';
 import PayDetails from './payDetails';
 function PaymentDetail() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     useEffect(() => {
         return () => {
             dispatch(fetchPayment());
         }
     }, [dispatch]);
     const { PaymentData } = useSelector((state) => state.payment);
+    const statusUpdate = async (id) => {
+        await dispatch(StatusPayment(id));
+        await dispatch(fetchPayment());
+    }
     const rows = PaymentData?.map((payment, index) => {
         return {
             id: index + 1,
@@ -23,7 +26,7 @@ function PaymentDetail() {
             Address: payment.address,
             PaymentId: payment.paymentID,
             OrderDate: payment.createdAt,
-            Status: payment.status,
+            Status: payment,
             Details: payment.cart,
         }
     });
@@ -88,7 +91,7 @@ function PaymentDetail() {
             width: 120,
             renderCell: (params) =>
                 <Button
-                    style={{ backgroundColor: '#595775', textAlign: 'center', color: 'white', padding: '2px 8px', margin: 'auto' }}
+                    style={{ backgroundColor: '#595775 ', textAlign: 'center', color: 'white', padding: '2px 8px', margin: 'auto' }}
                 >
                     <PayDetails details={params.value} />
                 </Button >
@@ -102,13 +105,11 @@ function PaymentDetail() {
             //     `${params.row.firstName || ''} ${params.row.lastName || ''}`
             renderCell: (params) =>
                 <Button style={{
-                    backgroundColor: '#595775', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
-                }}>
-                    {params.value === false ? 'pending' : 'Done'}
-                </Button >
+                    backgroundColor: '#595775 ', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
+                }} onClick={() => statusUpdate(params.value._id)}>
+                    {params.value.status === false ? 'pending' : 'Done'}
+                </Button>
         },
-
-
     ];
     return (
         <>
@@ -156,7 +157,6 @@ function PaymentDetail() {
                                 <DataGrid
                                     rows={rows}
                                     columns={columns}
-                                    // autoHeight={true}
                                     rowHeight={90}
                                     headerHeight={60}
                                     pageSize={5}

@@ -73,7 +73,7 @@ export default makeStyles((theme) => ({
     // showing 1-4 of 4 items
     foodResult: {
         padding: '15px 20px',
-        color: '#595775',
+        color: '#595775 ',
         fontSize: '20px',
         fontWeight: 'bold',
         letterSpacing: '1px',

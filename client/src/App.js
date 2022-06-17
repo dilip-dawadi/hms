@@ -7,6 +7,7 @@ import AddToCart from './Component/Client/UserDetail/addToCart/addToCart';
 import HomePageForm from './Component/Admin/homePageAdmin/Admin';
 import FoodPage from './Component/Admin/foodPageAdmin/foodAdmin';
 import NavBar from './Component/Extra/navBar/navBar';
+import Footer from './Component/Extra/Footer/footer';
 import PageNotFound from './Component/Extra/pageNotFound';
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -28,6 +29,7 @@ const App = () => {
             {!user?.result?.role ? <Route path="/cart" element={<AddToCart />} /> : <Route path="/payment" element={<AddToCart />} />}
             <Route path="*" element={<PageNotFound />} />
           </Routes>
+          <Footer />
         </Container>
       </React.StrictMode>
     </BrowserRouter>

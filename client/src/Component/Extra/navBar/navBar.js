@@ -22,7 +22,6 @@ import { LOGOUT } from '../../redux/constants/actionTypes';
 
 const pages = ['home', 'food', 'room', 'contact'];
 const ResponsiveAppBar = () => {
-    const { AsingleUser } = useSelector((state) => state.Auth);
     const location = useLocation();
     const dispatch = useDispatch();
     const [aUser, setaUser] = React.useState();
@@ -35,6 +34,7 @@ const ResponsiveAppBar = () => {
             dispatch(singleUser(user?.result?._id));
         }
     }, [dispatch]);
+    const { AsingleUser } = useSelector((state) => state.Auth);
     const logout = () => {
         dispatch({ type: LOGOUT });
         setUser(null);
@@ -51,7 +51,7 @@ const ResponsiveAppBar = () => {
             }
             setUser(JSON.parse(localStorage.getItem('profile')));
         }
-    }, [user?.token]);
+    }, [location]);
     React.useEffect(() => {
         setaUser(AsingleUser);
     }, [AsingleUser, dispatch]);
@@ -70,7 +70,7 @@ const ResponsiveAppBar = () => {
 
     return (
         <AppBar position="fixed" style={{
-            backgroundColor: 'transparent',
+            backgroundColor: 'rgba(0,0,0, 0.2)',
             // boxShadow: 'none',
             backgroundBlendMode: 'darken',
             zIndex: '100',
@@ -173,8 +173,8 @@ const ResponsiveAppBar = () => {
                     <Box sx={{ flexGrow: 0 }}>
 
                         {user ? <Tooltip title="Open Profile"><IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt={`${aUser?.name}`} src={`${aUser?.selectedFile}`} style={{
-                                backgroundColor: 'rgb(32 51 85)',
+                            <Avatar alt={`${user?.result?.name}`} src={`${user?.result?.selectedFile}`} style={{
+                                backgroundColor: '#595775 ',
                             }} />
                         </IconButton></Tooltip> : <Tooltip title="Login">
                             <NavLink to='/auth' style={{

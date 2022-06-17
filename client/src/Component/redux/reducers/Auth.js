@@ -12,7 +12,8 @@ const authReducer = (state = { authData: null }, action) => {
       return { ...state, AsingleUser: { ...action.payload.singleUser } };
 
     case actionType.UPDATE_SINGLE_USER:
-      return { ...state, AsingleUser: action.payload.updateSingleUser };
+      localStorage.setItem('profile', JSON.stringify({ ...action.payload.updateSingleUser }));
+      return { ...state, AsingleUser: action.payload.updateSingleUser.result };
 
     default:
       return state;

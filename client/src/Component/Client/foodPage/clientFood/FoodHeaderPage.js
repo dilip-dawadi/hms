@@ -75,7 +75,7 @@ const FoodHeaderPage = ({ foodLength }) => {
                         <MenuItem value={'createdAt'}>Newest Product</MenuItem>
                         <MenuItem value={'-createdAt'}>Oldest Product</MenuItem>
                         {/* price */}
-                        <MenuItem value={'-price'}>Price: Hight to Low </MenuItem>
+                        <MenuItem value={'-price'}>Price: High to Low </MenuItem>
                         <MenuItem value={'price'}>Price: Low to High</MenuItem>
                         {/* best Sold */}
                         <MenuItem value={'-sold'}>Best Sales</MenuItem>

@@ -85,7 +85,7 @@ const ClientFoodView = () => {
                   {foodData.title.split(" ").splice(0, 2).join(" ")}
                 </Typography>
                 <VolumeUpIcon style={{
-                  color: '#595775',
+                  color: '#595775 ',
                   paddingTop: '4px',
                   cursor: 'pointer',
                 }}
@@ -158,9 +158,9 @@ const ClientFoodView = () => {
                     .map((tag) => (
                       <Button
                         style={{
-                          backgroundColor: "#595775",
+                          backgroundColor: "#595775 ",
                           "&:hover": {
-                            backgroundColor: "#595775",
+                            backgroundColor: "#595775 ",
                           },
 
                           borderRadius: "6px",

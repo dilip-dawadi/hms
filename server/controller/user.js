@@ -93,9 +93,11 @@ export const updateSingleUser = async (req, res) => {
         if (address.length < 3 || address.length > 20) return res.status(404).json({ message: 'Address required 3 to 20 char' });
         // selectedFile validation
         if (selectedFile === null) return res.status(404).json({ message: 'SelectedFile is Required' });
+        const updatedUser = await User.findByIdAndUpdate(id, { email, number, name: `${firstName} ${lastName}`, role, selectedFile, number, address }, { new: true });
 
-        const result = await User.findByIdAndUpdate(id, { email, number, name: `${firstName} ${lastName}`, role, selectedFile, number, address }, { new: true });
-        res.status(200).json({ result: { role, _id }, message: "User Updated" });
+        const token = jwt.sign({ email: updatedUser.email, id: updatedUser._id, role: updatedUser.role }, process.env.JWT, { expiresIn: '1d' });
+
+        res.status(200).json({ result: updatedUser, token, message: "User Updated" });
 
     } catch (error) {
         res.json({ message: error });
@@ -126,4 +128,4 @@ export const addCart = async (req, res) => {
     } catch (err) {
         return res.status(500).json({ message: err.message })
     }
-}
+};

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
     container: {
         padding: '0.5rem 1rem',
+        marginBottom: '1rem',
     },
     media: {
         width: '100%',
@@ -51,14 +52,14 @@ export default makeStyles((theme) => ({
         color: 'white',
         fontWeight: 'bold',
         display: 'flex',
-        backgroundColor: '#595775',
+        backgroundColor: '#595775 ',
         '&:hover': {
-            backgroundColor: '#595775',
+            backgroundColor: '#595775 ',
         },
         // disable
         '&:disabled': {
             color: 'white',
-            backgroundColor: '#595775',
+            backgroundColor: '#595775 ',
         }
     },
 }));

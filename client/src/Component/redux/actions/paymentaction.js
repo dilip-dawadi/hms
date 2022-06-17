@@ -15,6 +15,18 @@ export const fetchPayment = () => async (dispatch) => {
         }
     }
 }
+export const StatusPayment = (id) => async () => {
+    try {
+        const { data } = await api.StatusPayment(id);
+        NotifySuccess(data.message);
+    } catch (error) {
+        if (error.response.status >= 400 && error.response.status <= 500) {
+            NotifyError(error.response.data.message);
+        } else {
+            NotifyError(error.message);
+        }
+    }
+}
 export const createPayment = (cart, paymentID, address) => async () => {
     try {
         const { data } = await api.createPayment({ cart, paymentID, address });

@@ -24,7 +24,7 @@ function AddToCart() {
                 dispatch(singleUser(user?.result?._id));
             }
         }
-    }, [dispatch, user]);
+    }, [dispatch]);
     const addToCart = async (cart) => {
         await dispatch(aCart(cart));
         await dispatch(singleUser(user?.result?._id));
@@ -115,7 +115,7 @@ function AddToCart() {
                         }, 3000);
                         increment(params.value)
                     }}
-                    style={{ backgroundColor: '#595775', textAlign: 'center', color: 'white', padding: '2px', margin: 'auto' }}
+                    style={{ backgroundColor: '#595775 ', textAlign: 'center', color: 'white', padding: '2px', margin: 'auto' }}
                     disabled={disable}
                 >
                     <Add />
@@ -318,7 +318,7 @@ function AddToCart() {
                                             />
                                             <Button
                                                 style={{
-                                                    backgroundColor: '#595775',
+                                                    backgroundColor: '#595775 ',
                                                     textAlign: 'center',
                                                     color: 'white',
                                                     padding: '2px 20px',
@@ -365,7 +365,7 @@ function AddToCart() {
                                             }, 0)}
                                         </Typography>
                                         <Button style={{
-                                            backgroundColor: '#595775',
+                                            backgroundColor: '#595775 ',
                                             textAlign: 'center',
                                             color: 'white',
                                             margin: 'auto',
