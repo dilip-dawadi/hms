@@ -6,6 +6,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { signin, signup } from '../../redux/actions/Auth';
 import useStyles from './Styles';
 import Input from './Input';
+import Google from './Google';
 
 import { storage } from '../firebase';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";

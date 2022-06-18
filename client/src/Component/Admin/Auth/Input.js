@@ -1,29 +1,11 @@
 import React from 'react';
-import { TextField, Grid, InputAdornment, IconButton } from '@material-ui/core';
-import { alpha, styled } from '@mui/material/styles';
+import { Grid, InputAdornment, IconButton } from '@material-ui/core';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-const CssTextField = styled(TextField)({
-  '& label.Mui-focused': {
-    color: 'white',
-    margin: '-9px 0px',
-  },
-  '& label.Mui-focused:after': {
-    borderColor: 'green',
-  },
-  '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: 'gray',
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: 'gray',
-      borderWidth: '1px',
-    },
-  }
-});
+import StyleTextField from '../../Extra/styleTextField';
 const Input = ({ name, handleChange, label, half, autoFocus, type, handleShowPassword, handleShowCPassword }) => (
   <Grid item xs={12} sm={half ? 6 : 12}>
-    <CssTextField
+    <StyleTextField
       name={name}
       onChange={handleChange}
       variant="outlined"
@@ -31,6 +13,7 @@ const Input = ({ name, handleChange, label, half, autoFocus, type, handleShowPas
       label={label}
       autoFocus={autoFocus}
       type={type}
+
       inputProps={{
         style: {
           color: 'black', background: 'white', padding: '16px 10px',

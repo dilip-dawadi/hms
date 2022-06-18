@@ -30,9 +30,6 @@ const ResponsiveAppBar = () => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
     React.useEffect(() => {
-        return () => {
-            dispatch(singleUser(user?.result?._id));
-        }
     }, [dispatch]);
     const { AsingleUser } = useSelector((state) => state.Auth);
     const logout = () => {
@@ -42,11 +39,10 @@ const ResponsiveAppBar = () => {
     }
     React.useEffect(() => {
         const token = user?.token;
-        console.log('hello');
         return () => {
             if (token) {
                 const decodedToken = decode(token);
-
+                dispatch(singleUser(user?.result?._id));
                 if (decodedToken.exp * 1000 < new Date().getTime()) logout();
             }
             setUser(JSON.parse(localStorage.getItem('profile')));
@@ -131,7 +127,9 @@ const ResponsiveAppBar = () => {
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
                             sx={{
-                                display: { xs: 'block', md: 'none' },
+                                display: {
+                                    xs: 'block', md: 'none', backgroundColor: 'rgba(0,0,0, 0.2)',
+                                },
                             }}
                         >
                             {pages.map((page) => (
@@ -269,7 +267,7 @@ const ResponsiveAppBar = () => {
                     </Box>
                 </Toolbar>
             </Container>
-        </AppBar>
+        </AppBar >
     );
 };
 export default ResponsiveAppBar;
