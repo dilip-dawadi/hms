@@ -3,16 +3,13 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Typography, Button, Grid } from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
-import { useNavigate } from 'react-router-dom';
 import { fetchPayment, StatusPayment } from '../../redux/actions/paymentaction';
 import moment from 'moment';
 import PayDetails from './payDetails';
 function PaymentDetail() {
     const dispatch = useDispatch();
     useEffect(() => {
-        return () => {
-            dispatch(fetchPayment());
-        }
+        dispatch(fetchPayment());
     }, [dispatch]);
     const { PaymentData } = useSelector((state) => state.payment);
     const statusUpdate = async (id) => {
@@ -104,8 +101,10 @@ function PaymentDetail() {
             // valueGetter: (params) =>
             //     `${params.row.firstName || ''} ${params.row.lastName || ''}`
             renderCell: (params) =>
-                <Button style={{
-                    backgroundColor: '#595775 ', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
+                <Button style={params.value.status === false ? {
+                    backgroundColor: 'red', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
+                } : {
+                    backgroundColor: 'green', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
                 }} onClick={() => statusUpdate(params.value._id)}>
                     {params.value.status === false ? 'pending' : 'Done'}
                 </Button>

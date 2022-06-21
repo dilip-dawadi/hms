@@ -39,12 +39,10 @@ const ClientFoodView = () => {
     sort: sort ? sort : "createdAt",
   };
   useEffect(() => {
-    return () => {
-      dispatch(fetchFoodPage(foodquery));
-      if (user) {
-        dispatch(singleUser(user?.result._id));
-      }
-    };
+    dispatch(fetchFoodPage(foodquery));
+    if (user) {
+      dispatch(singleUser(user?.result._id));
+    }
   }, [dispatch]);
 
   const classes = useStyles();

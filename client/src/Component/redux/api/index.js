@@ -38,5 +38,7 @@ export const updateFoodPage = (id, formData) => API.patch(`/foodpage/${id}`, for
 
 // fetch Payment
 export const getPayment = () => API.get(`/payment`);
+export const getPaymentClient = () => API.get(`/payment/client`);
 export const createPayment = (formData) => API.post(`/payment`, formData);
 export const StatusPayment = (id) => API.patch(`/payment/${id}`);
+export const deletePaymentByUser = (id) => API.delete(`/payment/${id}`);

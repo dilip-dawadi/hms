@@ -10,6 +10,7 @@ import FoodPage from './Component/Admin/foodPageAdmin/foodAdmin';
 import NavBar from './Component/Extra/navBar/navBar';
 import Footer from './Component/Extra/Footer/footer';
 import PageNotFound from './Component/Extra/pageNotFound';
+import UserHistory from './Component/Client/UserDetail/Paymenthistory/paymentHistory';
 import { gapi } from 'gapi-script';
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -39,6 +40,7 @@ const App = () => {
             <Route path="/" exact element={<Navigate to="/home" />} />
             <Route path="/auth" exact element={<Auth />} />
             <Route path="/profile" element={<UserDetail />} />
+            <Route path="/history" element={<UserHistory />} />
             <Route path="/user/:id/verify/:token" exact element={<Verify />} />
             {!user?.result?.role ? <Route path="/cart" element={<AddToCart />} /> : <Route path="/payment" element={<AddToCart />} />}
             <Route path="*" element={<PageNotFound />} />

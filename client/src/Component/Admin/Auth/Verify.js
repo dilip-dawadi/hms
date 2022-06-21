@@ -9,24 +9,27 @@ import axios from "axios";
 
 const Verify = () => {
     const params = useParams();
+    const navigate = useNavigate();
     const [checkVerify, setCheckVerify] = React.useState(false);
     const [message, setMessage] = React.useState('');
     console.log(params.id);
     console.log(params.token);
 
-    const verifyUser = () => {
+    useEffect(() => {
         axios.get(`http://localhost:5000/user/${params.id}/verify/${params.token}`).then(res => {
             setMessage(res.data.message);
             NotifySuccess(res.data.message);
             setCheckVerify(true);
+            navigate('/home');
         }
         ).catch(err => {
             setMessage(err.response.data.message);
             NotifyError(err.response.data.message);
             setCheckVerify(true);
+            navigate('/auth');
         }
         )
-    }
+    }, [navigate, params.id, params.token]);
 
     return (
         <div style={{
@@ -73,7 +76,7 @@ const Verify = () => {
                             letterSpacing: '5px',
                             cursor: 'pointer',
                             marginTop: '10px',
-                        }} onClick={verifyUser}>Verify</button>}
+                        }}>Verify</button>}
                 </div>
             </div>
         </div>

@@ -3,21 +3,15 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Typography, Button, Grid } from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
-import { fetchPayment, StatusPayment } from '../../../redux/actions/paymentaction';
+import { fetchPaymentClient } from '../../../redux/actions/paymentaction';
 import moment from 'moment';
-import PayDetails from './payDetails';
+import PayDetails from './paymentDetail';
 function PaymentDetail() {
     const dispatch = useDispatch();
     useEffect(() => {
-        return () => {
-            dispatch(fetchPayment());
-        }
+        dispatch(fetchPaymentClient());
     }, [dispatch]);
     const { PaymentData } = useSelector((state) => state.payment);
-    const statusUpdate = async (id) => {
-        await dispatch(StatusPayment(id));
-        await dispatch(fetchPayment());
-    }
     const rows = PaymentData?.map((payment, index) => {
         return {
             id: index + 1,
@@ -87,7 +81,7 @@ function PaymentDetail() {
             field: 'Details',
             headerName: 'Details',
             align: 'center',
-            width: 120,
+            width: 130,
             renderCell: (params) =>
                 <Button
                     style={{ backgroundColor: '#595775 ', textAlign: 'center', color: 'white', padding: '2px 8px', margin: 'auto' }}
@@ -99,14 +93,15 @@ function PaymentDetail() {
             field: 'Status',
             align: 'center',
             headerName: 'Status',
-            width: 130,
+            width: 170,
             // valueGetter: (params) =>
             //     `${params.row.firstName || ''} ${params.row.lastName || ''}`
             renderCell: (params) =>
                 <Button style={{
-                    backgroundColor: '#595775 ', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
-                }} onClick={() => statusUpdate(params.value._id)}>
-                    {params.value.status === false ? 'pending' : 'Done'}
+                    width: '100%',
+                    height: '100%',
+                }}>
+                    {params.value.status === false ? <img src='/process.png' alt='delivering' height={120} /> : <img src='/done.png' alt='delivered' height={120} />}
                 </Button>
         },
     ];
@@ -156,11 +151,10 @@ function PaymentDetail() {
                                 <DataGrid
                                     rows={rows}
                                     columns={columns}
-                                    rowHeight={90}
+                                    rowHeight={100}
                                     headerHeight={60}
                                     pageSize={5}
                                     rowsPerPageOptions={[5, 10, 20, 50]}
-                                    checkboxSelection
                                     sx={{
                                         "& .MuiDataGrid-columnHeaderTitle": {
                                             color: "black",

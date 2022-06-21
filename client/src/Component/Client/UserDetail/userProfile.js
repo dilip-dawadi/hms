@@ -23,9 +23,7 @@ export default function SimpleMenu() {
     const [aUser, setaUser] = useState();
     const { AsingleUser } = useSelector(state => state.Auth);
     useEffect(() => {
-        return () => {
-            user?.token && dispatch(singleUser(user?.result?._id));
-        }
+        user?.token && dispatch(singleUser(user?.result?._id));
     }, [dispatch]);
     useEffect(() => {
         setaUser(AsingleUser);

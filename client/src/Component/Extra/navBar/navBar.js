@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import HistoryIcon from '@mui/icons-material/History';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useSelector, useDispatch } from 'react-redux';
 import { singleUser } from '../../redux/actions/Auth';
@@ -38,14 +39,12 @@ const ResponsiveAppBar = () => {
     }
     React.useEffect(() => {
         const token = user?.token;
-        return () => {
-            if (token) {
-                const decodedToken = decode(token);
-                dispatch(singleUser(user?.result?._id));
-                if (decodedToken.exp * 1000 < new Date().getTime()) setUser(null);
-            }
-            setUser(JSON.parse(localStorage.getItem('profile')));
+        if (token) {
+            const decodedToken = decode(token);
+            dispatch(singleUser(user?.result?._id));
+            if (decodedToken.exp * 1000 < new Date().getTime()) setUser(null);
         }
+        setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location]);
     React.useEffect(() => {
         setaUser(AsingleUser);
@@ -241,6 +240,26 @@ const ResponsiveAppBar = () => {
                                             margin: 'auto',
                                         }}>
                                             <PermIdentityIcon style={{
+                                                textAlign: 'center',
+                                                margin: 'auto',
+                                                color: 'rgb(32, 41, 75)',
+                                            }} />
+                                        </MenuItem></Tooltip></NavLink>
+                                <NavLink to='history' style={{
+                                    textDecoration: 'none',
+                                    color: 'black',
+                                    margin: 'auto',
+                                }}>
+                                    <Tooltip title="history">
+                                        <MenuItem key={'history'} onClick={handleCloseUserMenu} style={{
+                                            fontWeight: 300,
+                                            letterSpacing: '2px',
+                                            fontSize: '1.1rem',
+                                            marginLeft: '0.4rem',
+                                            textTransform: 'capitalize',
+                                            margin: 'auto',
+                                        }}>
+                                            <HistoryIcon style={{
                                                 textAlign: 'center',
                                                 margin: 'auto',
                                                 color: 'rgb(32, 41, 75)',
