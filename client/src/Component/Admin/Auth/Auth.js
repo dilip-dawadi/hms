@@ -63,13 +63,12 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isSignup) {
-      dispatch(signup({ ...formData, selectedFile: imageUrl }));
+      dispatch(signup({ ...formData, selectedFile: imageUrl }, navigate));
     } else {
       dispatch(signin(formData, navigate));
     }
   };
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
 
   return (
     <Grid container className={isSignup ? classes.container : classes.container1}>
@@ -98,10 +97,9 @@ const SignUp = () => {
               <Avatar className={classes.avatar}>
                 <LockOutlinedIcon />
               </Avatar>
-              <Typography component="h1" variant="h5" style={{
-                letterSpacing: '2px', fontWeight: 600, textTransform: 'uppercase', color: 'white'
-              }}>{isSignup ? 'Sign up' : 'Sign in'}</Typography>
+              <Typography component="h1" variant="h5" className={classes.title} >{isSignup ? 'Sign up' : 'Sign in'}</Typography>
             </div>
+            <Google isSignup={isSignup} />
             <form className={classes.formData} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 {isSignup && (

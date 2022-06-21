@@ -113,7 +113,7 @@ export default function SimpleMenu() {
                                         <b>Name:</b> {aUser?.name}
                                     </Typography>
                                     <Typography variant="body2" component="p">
-                                        <b>Email:</b> {aUser?.email.split('@')[0]}
+                                        <b>Email:</b> {aUser?.email?.split('.')[0]}
                                     </Typography>
                                     <Typography variant="body2" component="p">
                                         <b>Number:</b> {aUser?.number}

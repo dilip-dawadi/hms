@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
     height: '100%',
   },
   Style: {
-    marginTop: '20px',
+    marginTop: '25px',
     height: '102vh',
     display: 'flex',
     flexDirection: 'column',
@@ -36,8 +36,8 @@ export default makeStyles((theme) => ({
   paper: {
     borderRadius: '0.5rem',
     maxWidth: '500px',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(0),
+    paddingBottom: theme.spacing(1),
     paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
     margin: theme.spacing(3),
@@ -52,6 +52,12 @@ export default makeStyles((theme) => ({
     // backgroundColor: '#17253e',
     backgroundColor: 'transparent',
     border: '1px solid #17253e',
+  },
+  title: {
+    letterSpacing: '2px',
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    color: 'white'
   },
   avatar: {
     margin: theme.spacing(1),
@@ -71,18 +77,32 @@ export default makeStyles((theme) => ({
     fontWeight: 'bold',
     marginTop: theme.spacing(2),
     '&:hover': {
-      // backgroundColor: 'rgb(32 51 85)',
       backgroundColor: 'rgb(32 51 85) ',
       color: 'white',
     }
   },
   googleButton: {
-    marginBottom: theme.spacing(2),
-    marginTop: theme.spacing(2),
-    backgroundColor: 'rgb(32 51 85) ',
+    marginBottom: theme.spacing(-1),
+    marginTop: theme.spacing(0),
+    backgroundColor: 'rgb(32 51 85)',
     color: 'white',
     fontSize: '15px',
     padding: '0.4rem 1rem',
     letterSpacing: '1px',
+    '&:hover': {
+      backgroundColor: 'rgb(32 51 85)',
+    }
+  },
+  googleButton1: {
+    marginBottom: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    backgroundColor: 'rgb(32 51 85)',
+    color: 'white',
+    fontSize: '15px',
+    padding: '0.4rem 1rem',
+    letterSpacing: '1px',
+    '&:hover': {
+      backgroundColor: 'rgb(32 51 85)',
+    }
   },
 }));

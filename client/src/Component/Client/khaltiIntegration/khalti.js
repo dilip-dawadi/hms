@@ -23,7 +23,7 @@ export default function Khalti({
                 navigate("/food");
             },
             onError(error) {
-                // handle errors
+
                 console.log(error.message);
             },
             onClose() {

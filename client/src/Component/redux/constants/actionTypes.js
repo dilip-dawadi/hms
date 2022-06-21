@@ -3,6 +3,8 @@ export const AUTH = 'AUTH';
 export const FETCH_SINGLEUSER = 'FETCH_SINGLEUSER';
 export const LOGOUT = 'LOGOUT';
 export const UPDATE_SINGLE_USER = 'UPDATE_SINGLE_USER';
+export const IS_LOADING = 'IS_LOADING';
+export const IS_NOT_LOADING = 'IS_NOT_LOADING';
 
 // homePage
 export const FETCH_HOMEPAGE = 'FETCH_HOMEPAGE';

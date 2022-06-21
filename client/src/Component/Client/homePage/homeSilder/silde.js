@@ -65,7 +65,7 @@ function Slider() {
           >
             {homePageData?.map((step, index) => (
               <div key={step.title} className={classes.design} >
-                {Math.abs(activeStep - index) <= 2 ? (
+                {Math.abs(activeStep - index) <= 2 && (
                   (device === 'mobile') ? (<CardMedia
                     style={{
                       backgroundImage: `url('./backimage.png'), url(${step.selectedFile})`,
@@ -78,12 +78,12 @@ function Slider() {
                       className={classes.media}
                       title={step.title} />
                   )
-                ) : null}
+                )}
                 <Typography className={classes.title} variant="h5" component="h2">{step.title}</Typography>
                 <Typography className={classes.detail} variant="body2" component="p">{step.detail}</Typography>
                 <Button variant="contained" className={classes.button} onClick={
                   () => {
-                    navigate('/food');
+                    navigate('/room');
                   }
                 } >
                   Book Room

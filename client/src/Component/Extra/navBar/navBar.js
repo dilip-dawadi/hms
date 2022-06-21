@@ -29,8 +29,7 @@ const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
-    React.useEffect(() => {
-    }, [dispatch]);
+
     const { AsingleUser } = useSelector((state) => state.Auth);
     const logout = () => {
         dispatch({ type: LOGOUT });
@@ -43,7 +42,7 @@ const ResponsiveAppBar = () => {
             if (token) {
                 const decodedToken = decode(token);
                 dispatch(singleUser(user?.result?._id));
-                if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+                if (decodedToken.exp * 1000 < new Date().getTime()) setUser(null);
             }
             setUser(JSON.parse(localStorage.getItem('profile')));
         }

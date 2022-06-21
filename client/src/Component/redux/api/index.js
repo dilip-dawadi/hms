@@ -22,6 +22,8 @@ export const deleteUser = (id) => API.delete(`/user/deleteuser/${id}`);
 
 export const addCart = (formData) => API.patch(`/user/addcart`, formData);
 
+export const VerifyUser = (id, token) => API.get(`/user/${id}/verify/${token}`);
+
 // fetch homePage
 export const getHomePage = () => API.get(`/homepage`);
 export const createHomePage = (formData) => API.post(`/homepage`, formData);
