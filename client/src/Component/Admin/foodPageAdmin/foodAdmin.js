@@ -1,7 +1,7 @@
 import React from 'react'
 import FoodPageForm from './foodPageForm/foodPageForm'
 import FoodPagePost from './foodPagePost/foodPagePost';
-import { Grow, Grid, Paper } from '@material-ui/core';
+import { Grid, Paper } from '@material-ui/core';
 import Drawer from '../Drawer/drawer.js';
 import ClientFoodPage from '../../Client/foodPage/clientFoodPage';
 const FoodAdminPage = () => {
@@ -30,10 +30,10 @@ const FoodAdminPage = () => {
                     padding: '0px',
                     marginTop: '70px',
                 }} spacing={0}>
-                    <Grid item xs={3} sm={3} md={3}>
+                    <Grid item xs={2} sm={2} md={2}>
                         <Drawer />
                     </Grid>
-                    <Grid item xs={9} sm={9} md={9}>
+                    <Grid item xs={10} sm={10} md={10}>
                         <Paper style={{
                             margin: '0px',
                             padding: '0px',

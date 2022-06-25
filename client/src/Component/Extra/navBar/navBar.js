@@ -30,8 +30,8 @@ const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('profile')));
-
     const { AsingleUser } = useSelector((state) => state.Auth);
+    const [navbarColor, setNavbarColor] = React.useState(false);
     const logout = () => {
         dispatch({ type: LOGOUT });
         setUser(null);
@@ -62,11 +62,20 @@ const ResponsiveAppBar = () => {
         setAnchorElUser(null);
     };
 
+    const changeBackground = () => {
+        window.scrollY >= 200 ? setNavbarColor(true) : setNavbarColor(false)
+    }
+    window.addEventListener('scroll', changeBackground)
     return (
-        <AppBar position="fixed" style={{
+        <AppBar position="fixed" style={!navbarColor ? {
             backgroundColor: 'rgba(0,0,0, 0.2)',
             // boxShadow: 'none',
             backgroundBlendMode: 'darken',
+            zIndex: '100',
+        } : {
+            backgroundColor: 'rgb(32,51,85)',
+            backgroundBlendMode: 'darken',
+            borderRadius: '0% 0% 50% 50% / 0% 0% 7% 7%',
             zIndex: '100',
         }}>
             <Container maxWidth="xl" sx={{

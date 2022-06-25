@@ -22,6 +22,10 @@ export const deleteUser = (id) => API.delete(`/user/deleteuser/${id}`);
 
 export const addCart = (formData) => API.patch(`/user/addcart`, formData);
 
+export const deleteaCart = (id, cart) => API.patch(`/user/dltcart/${id}`, cart);
+
+export const incrementaCart = (id, data) => API.patch(`/user/increment/${id}`, data);
+
 export const VerifyUser = (id, token) => API.get(`/user/${id}/verify/${token}`);
 
 // fetch homePage
@@ -30,8 +34,8 @@ export const createHomePage = (formData) => API.post(`/homepage`, formData);
 export const deleteHome = (id) => API.delete(`/homepage/deletehome/${id}`)
 export const updateHomePage = (id, formData) => API.patch(`/homepage/${id}`, formData);
 // fetch foodPage
-export const getFoodPage = (foodquery) => API.get(`/foodpage?page=${foodquery.page}&limit=${foodquery.limit}&sort=${foodquery.sort}`);
-export const getFoodBySearch = ({ search, tags }) => API.get(`/foodpage/search?searchFood=${search || 'none'}&tags=${tags}`);
+export const getFoodPage = (foodquery) => API.get(`/foodpage?page=${foodquery.page}&limit=${foodquery.limit}&sort=${foodquery.sort}&tags=${foodquery.tags}&title[regex]=${foodquery.title}`);
+export const getFoodBySearch = ({ search, tags }) => API.get(`/foodpage/search?searchFood=${search || 'none'}&tags=${tags || 'none'}`);
 export const createFoodPage = (formData) => API.post(`/foodpage`, formData);
 export const deleteFood = (id) => API.delete(`/foodpage/deletefood/${id}`)
 export const updateFoodPage = (id, formData) => API.patch(`/foodpage/${id}`, formData);

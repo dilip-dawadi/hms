@@ -20,7 +20,6 @@ export const fetchFoodPage = (foodquery) => async (dispatch) => {
 }
 export const getFoodBySearch = ({ search, tags }) => async (dispatch) => {
     try {
-        console.log(search, 'searchFoods');
         dispatch({ type: START_FOODPAGE });
         const { data: { foodSearchData, message } } = await api.getFoodBySearch({ search, tags });
         NotifySuccess(message);

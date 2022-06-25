@@ -112,82 +112,65 @@ function PaymentDetail() {
     ];
     return (
         <>
-            <Grid container style={{
+            <Grid container justifyContent="space-between" alignItems="stretch" style={{
                 padding: '0px',
-                margin: '0px',
-                width: '100%',
+                margin: 'auto',
+                width: '90%',
                 height: '100%',
-            }}>
-                <div style={{
-                    backgroundImage: 'url(/prabandhak.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    height: '100%',
+            }} spacing={0}>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
+                    padding: '0px',
+                    margin: '0px',
                     width: '100%',
-                }} >
-                    <Grid container justifyContent="space-between" alignItems="stretch" style={{
-                        padding: '0px',
-                        margin: '70px auto 0px auto',
-                        width: '80%',
-                        height: '100%',
-                    }} spacing={0}>
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{
-                            padding: '0px',
-                            margin: '0px',
-                            width: '100%',
-                            height: '100%',
-                        }}>
-                            <div style={{
-                                textAlign: 'center',
-                                padding: '25px 0px 15px 0px',
-                                fontSize: '20px',
-                                fontWeight: 'bold',
-                                letterSpacing: '2px',
-                                color: '#fff',
-                                letterSpacing: '1px',
-                                textTransform: 'uppercase',
-                            }}>Payment History</div>
+                    height: '100%',
+                }}>
+                    <div style={{
+                        textAlign: 'center',
+                        padding: '25px 0px 15px 0px',
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                        letterSpacing: '2px',
+                        color: '#fff',
+                        textTransform: 'uppercase',
+                    }}>Payment History</div>
 
-                            <div style={{
-                                padding: '5px 5px',
-                                height: '90vh'
-                            }} >
-                                <DataGrid
-                                    rows={rows}
-                                    columns={columns}
-                                    rowHeight={90}
-                                    headerHeight={60}
-                                    pageSize={5}
-                                    rowsPerPageOptions={[5, 10, 20, 50]}
-                                    checkboxSelection
-                                    sx={{
-                                        "& .MuiDataGrid-columnHeaderTitle": {
-                                            color: "black",
-                                            fontSize: 16,
-                                            letterSpacing: '1px',
-                                            fontWeight: 'bold',
-                                            padding: "0px 20px",
-                                        },
-                                        "& .MuiDataGrid-virtualScrollerRenderZone": {
-                                            "& .MuiDataGrid-row": {
-                                                "&:nth-of-type(2n)": { backgroundColor: "rgba(235, 235, 235, .7)" }
-                                            }
-                                        }
-                                    }}
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        padding: '0px 10px',
-                                        margin: 'auto',
-                                        borderRadius: '6px',
-                                        backgroundColor: 'white',
-                                    }}
-                                />
-                            </div>
-                        </Grid>
-                    </Grid>
-                </div>
+                    <div style={{
+                        padding: '5px 5px',
+                        height: '90vh'
+                    }} >
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            rowHeight={90}
+                            headerHeight={60}
+                            pageSize={5}
+                            rowsPerPageOptions={[5, 10, 20, 50]}
+                            checkboxSelection
+                            sx={{
+                                "& .MuiDataGrid-columnHeaderTitle": {
+                                    color: "black",
+                                    fontSize: 16,
+                                    letterSpacing: '1px',
+                                    fontWeight: 'bold',
+                                    padding: "0px 20px",
+                                },
+                                "& .MuiDataGrid-virtualScrollerRenderZone": {
+                                    "& .MuiDataGrid-row": {
+                                        "&:nth-of-type(2n)": { backgroundColor: "rgba(235, 235, 235, .7)" }
+                                    }
+                                }
+                            }}
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                padding: '0px 10px',
+                                margin: 'auto',
+                                borderRadius: '6px',
+                                backgroundColor: 'white',
+                            }}
+                        />
+                    </div>
+                </Grid>
             </Grid>
         </>
     )

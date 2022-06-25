@@ -1,6 +1,6 @@
 import * as actionType from '../constants/actionTypes';
 import { produce } from 'immer';
-const authReducer = (state = { isLoading: true, authData: null }, action) => {
+const authReducer = (state = { isLoading: false, authData: null }, action) => {
   switch (action.type) {
     case actionType.IS_LOADING:
       return produce(state, (draft) => {

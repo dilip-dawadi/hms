@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import Auth from './Component/Admin/Auth/Auth';
@@ -45,7 +45,7 @@ const App = () => {
             {!user?.result?.role ? <Route path="/cart" element={<AddToCart />} /> : <Route path="/payment" element={<AddToCart />} />}
             <Route path="*" element={<PageNotFound />} />
           </Routes>
-          <Footer />
+          {!user?.result?.role && <Footer />}
         </Container>
       </React.StrictMode>
     </BrowserRouter>

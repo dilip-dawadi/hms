@@ -176,3 +176,51 @@ export const addCart = async (req, res) => {
         return res.status(500).json({ message: err.message })
     }
 };
+
+export const deleteaCart = async (req, res) => {
+    const { id } = req.params;
+    const cart = req.body;
+    try {
+        const user = await User.findById(req.userId)
+        if (!user) return res.status(400).json({ message: "User does not exist." })
+        const newCart = cart.filter(item => item._id !== id)
+        await User.findOneAndUpdate({ _id: req.userId }, {
+            cart: newCart
+        })
+        res.status(200).json({ message: "Item Removed" })
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}
+
+export const incrementCart = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = req.body;
+        const { cart, increment } = data;
+        const user = await User.findById(req.userId)
+        if (!user) return res.status(400).json({ message: "User does not exist." })
+        const newCart = cart.map(item => {
+            if (item._id === id) {
+                if (increment === true) {
+                    item.quantity += 1;
+                } else {
+                    item.quantity === 1 ? item.quantity = 1 : item.quantity -= 1
+                }
+            }
+            return item;
+        }
+        )
+        await User.findOneAndUpdate({ _id: req.userId }, {
+            cart: newCart
+        })
+        if (increment === true) {
+            res.status(200).json({ message: "Item Increment" })
+        } else {
+            res.status(200).json({ message: "Item Decrement" })
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}

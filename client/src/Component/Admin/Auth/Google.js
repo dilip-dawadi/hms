@@ -5,7 +5,9 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "./Icon";
 import useStyles from "./Styles";
-import { NotifyError, NotifyInfo } from "../../redux/actions/notify";
+import { NotifyError } from "../../redux/actions/notify";
+
+
 import { signin, signup } from '../../redux/actions/Auth';
 
 const GoogleAuth = ({ isSignup }) => {
@@ -13,7 +15,6 @@ const GoogleAuth = ({ isSignup }) => {
     const classes = useStyles();
     const navigate = useNavigate();
     const clientId = "426614789973-umcv7inmjg49cprhasmtmiu1q1j705s2.apps.googleusercontent.com";
-    const { isLoading } = useSelector((state) => state.Auth);
     const googleSuccess = async (res) => {
         const result = res?.profileObj;
         const formData = {

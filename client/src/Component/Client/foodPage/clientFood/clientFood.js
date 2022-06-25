@@ -33,10 +33,14 @@ const ClientFoodView = () => {
   const page = query.get('page');
   const limit = query.get('limit');
   const sort = query.get('sort');
+  const tags = query.get('tags');
+  const title = query.get('title')
   const foodquery = {
     page: page ? Number(page) : 1,
     limit: limit ? Number(limit) : 4,
-    sort: sort ? sort : "createdAt",
+    sort: sort ? sort : "-createdAt",
+    tags: tags ? tags : "none",
+    title: title || "none",
   };
   useEffect(() => {
     dispatch(fetchFoodPage(foodquery));

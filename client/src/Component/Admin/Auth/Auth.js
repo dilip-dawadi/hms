@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, Button, Paper, Grid, Typography } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -7,7 +7,7 @@ import { signin, signup } from '../../redux/actions/Auth';
 import useStyles from './Styles';
 import Input from './Input';
 import Google from './Google';
-
+import Loading from "../../redux/actions/loading/loading";
 import { storage } from '../firebase';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
@@ -69,9 +69,11 @@ const SignUp = () => {
     }
   };
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
+  const { isLoading } = useSelector((state) => state.Auth);
+  console.log(isLoading);
   return (
     <Grid container className={isSignup ? classes.container : classes.container1}>
+      {isLoading && <Loading />}
       <div style={isSignup ? {
         backgroundImage: 'url(/prabandhak.png)',
         backgroundSize: 'cover',
