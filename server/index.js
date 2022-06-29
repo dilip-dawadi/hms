@@ -8,6 +8,7 @@ import userRoutes from './routes/users.js'
 import homePageRoutes from './routes/homePage.js'
 import foodPageRoutes from './routes/foodPage.js'
 import paymentRoutes from './routes/payment.js'
+import morgan from 'morgan';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.json(
 ));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors());
+app.use(morgan("dev"));
 app.use('/user', userRoutes)
 app.use('/homePage', homePageRoutes)
 app.use('/foodPage', foodPageRoutes)

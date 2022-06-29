@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 
 const Drawered = () => {
     const user = JSON.parse(localStorage.getItem('profile'));
-    console.log(user)
     const navigate = useNavigate();
     return (
         <div style={{
@@ -41,7 +40,7 @@ const Drawered = () => {
                 </List>
                 <Divider style={{ backgroundColor: 'white' }} />
                 <List>
-                    {['payment', 'contact', 'Spam'].map((text, index) => (
+                    {['payment', 'users', 'spam', 'contact'].map((text, index) => (
                         <ListItem key={text}>
                             <ListItemButton onClick={() => navigate(`/${text}`)}>
                                 <ListItemIcon style={{

@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import Auth from './Component/Admin/Auth/Auth';
 import Verify from './Component/Admin/Auth/Verify';
+import AllUser from './Component/Admin/Users/allUser/index';
+import Spammer from './Component/Admin/Users/spam/index';
 import UserDetail from './Component/Client/UserDetail/userProfile';
 import AddToCart from './Component/Client/UserDetail/addToCart/addToCart';
 import HomePageForm from './Component/Admin/homePageAdmin/Admin';
@@ -11,6 +13,7 @@ import NavBar from './Component/Extra/navBar/navBar';
 import Footer from './Component/Extra/Footer/footer';
 import PageNotFound from './Component/Extra/pageNotFound';
 import UserHistory from './Component/Client/UserDetail/Paymenthistory/paymentHistory';
+import FoodById from './Component/Client/foodPage/extraFeature/foodbyId/foodById';
 import { gapi } from 'gapi-script';
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -37,8 +40,11 @@ const App = () => {
           <Routes>
             <Route path="/home" element={<HomePageForm />} />
             <Route path="/food" element={<FoodPage />} />
+            <Route path="/food/:id" element={<FoodById />} />
             <Route path="/" exact element={<Navigate to="/home" />} />
             <Route path="/auth" exact element={<Auth />} />
+            <Route path="/users" exact element={<AllUser />} />
+            <Route path="/spam" exact element={<Spammer />} />
             <Route path="/profile" element={<UserDetail />} />
             <Route path="/history" element={<UserHistory />} />
             <Route path="/user/:id/verify/:token" exact element={<Verify />} />

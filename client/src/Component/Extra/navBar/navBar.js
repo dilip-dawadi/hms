@@ -63,13 +63,12 @@ const ResponsiveAppBar = () => {
     };
 
     const changeBackground = () => {
-        window.scrollY >= 200 ? setNavbarColor(true) : setNavbarColor(false)
+        window.scrollY >= 50 ? setNavbarColor(true) : setNavbarColor(false)
     }
     window.addEventListener('scroll', changeBackground)
     return (
         <AppBar position="fixed" style={!navbarColor ? {
             backgroundColor: 'rgba(0,0,0, 0.2)',
-            // boxShadow: 'none',
             backgroundBlendMode: 'darken',
             zIndex: '100',
         } : {

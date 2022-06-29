@@ -70,7 +70,6 @@ const SignUp = () => {
   };
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
   const { isLoading } = useSelector((state) => state.Auth);
-  console.log(isLoading);
   return (
     <Grid container className={isSignup ? classes.container : classes.container1}>
       {isLoading && <Loading />}

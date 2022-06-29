@@ -2,14 +2,16 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mongoose from "mongoose";
 import User from "../models/user.js";
+import foodPage from "../models/foodpage.js";
 import verifyUser from "../models/valideUser.js";
 import { sendEmail } from "../Utils/nodemailer.js";
-
-export const deleteUsers = async (req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
-    await User.findByIdAndRemove(id);
-    res.json({ msg: 'Users Deleted' });
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json({ users, msg: 'All Users' });
+    } catch (err) {
+        res.status(500).send({ message: err.message });
+    }
 }
 export const signin = async (req, res) => {
     const { email, password } = req.body;
@@ -155,7 +157,8 @@ export const deleteUser = async (req, res) => {
     const { id } = req.params;
     try {
         if (!id) return res.status(404).json({ message: 'User not found' });
-        const result = await User.findByIdAndRemove(id);
+        await User.findByIdAndRemove(id);
+        const result = await User.find();
         res.status(200).json({ result, message: "User Deleted" });
     }
     catch (error) {
@@ -221,6 +224,27 @@ export const incrementCart = async (req, res) => {
             res.status(200).json({ message: "Item Decrement" })
         }
     } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}
+
+// report get by user 
+export const reportData = async (req, res) => {
+    const { userId } = req.params;
+    const { reportData } = req.body;
+    try {
+        const user = await User.findById(userId);
+        if (!user) return res.status(400).json({ message: "User does not exist." });
+        const report = user.report.find(item => item.reporterUserId === reportData.reporterUserId);
+        if (report) return res.status(404).json({ message: "You have already reported this user" });
+        await User.findByIdAndUpdate({ _id: userId }, {
+            $push: {
+                report: reportData
+            }
+        })
+        res.status(200).json({ message: "Report Added" })
+    }
+    catch (err) {
         return res.status(500).json({ message: err.message })
     }
 }

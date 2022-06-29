@@ -6,10 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Icon from "./Icon";
 import useStyles from "./Styles";
 import { NotifyError } from "../../redux/actions/notify";
-
-
 import { signin, signup } from '../../redux/actions/Auth';
-
 const GoogleAuth = ({ isSignup }) => {
     const dispatch = useDispatch();
     const classes = useStyles();

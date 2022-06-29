@@ -28,6 +28,10 @@ export const incrementaCart = (id, data) => API.patch(`/user/increment/${id}`, d
 
 export const VerifyUser = (id, token) => API.get(`/user/${id}/verify/${token}`);
 
+export const reportData = (userId, reportData) => API.post(`/user/report/${userId}`, reportData);
+
+export const getUsers = () => API.get(`/user/users`);
+
 // fetch homePage
 export const getHomePage = () => API.get(`/homepage`);
 export const createHomePage = (formData) => API.post(`/homepage`, formData);
@@ -39,6 +43,9 @@ export const getFoodBySearch = ({ search, tags }) => API.get(`/foodpage/search?s
 export const createFoodPage = (formData) => API.post(`/foodpage`, formData);
 export const deleteFood = (id) => API.delete(`/foodpage/deletefood/${id}`)
 export const updateFoodPage = (id, formData) => API.patch(`/foodpage/${id}`, formData);
+export const getFoodById = (id) => API.get(`/foodpage/${id}`);
+export const commentFood = (id, formData, updated) => API.patch(`/foodpage/comment/${id}`, formData, updated);
+export const deleteCommentFood = (id, cmtuserId) => API.delete(`/foodpage/comment/${id}/${cmtuserId}`);
 
 // fetch Payment
 export const getPayment = () => API.get(`/payment`);

@@ -1,30 +1,17 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { Typography, Button, Grid } from '@material-ui/core';
+import React from 'react';
+import { Typography, Grid, Button } from '@material-ui/core';
 import { DataGrid } from '@mui/x-data-grid';
-import { fetchPayment, StatusPayment } from '../../redux/actions/paymentaction';
-import moment from 'moment';
-import PayDetails from './payDetails';
-function PaymentDetail() {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchPayment());
-    }, [dispatch]);
-    const { PaymentData } = useSelector((state) => state.payment);
-    const statusUpdate = async (id) => {
-        await dispatch(StatusPayment(id));
-        await dispatch(fetchPayment());
-    }
-    const rows = PaymentData?.map((payment, index) => {
+import SpammersDetail from './detailSpam';
+function Spammer({ spammer }) {
+    const rows = spammer.map((r) => {
         return {
-            id: index + 1,
-            UserName: payment.name,
-            Address: payment.address,
-            PaymentId: payment.paymentID,
-            OrderDate: payment.createdAt,
-            Status: payment,
-            Details: payment.cart,
+            id: r._id,
+            UserName: r.name,
+            Email: r.email,
+            Address: r.address,
+            report: r.report,
+            Status: r.report.length,
+            Block: r._id,
         }
     });
     const columns = [
@@ -44,6 +31,19 @@ function PaymentDetail() {
                 </Typography>
         },
         {
+            field: 'Email',
+            headerName: 'Email',
+            align: 'center',
+            width: 240,
+            renderCell: (params) =>
+                <Typography variant="body2" color="textSecondary" component="p" style={{
+                    margin: "auto",
+                    letterSpacing: "1px",
+                }}>
+                    {params.value}
+                </Typography>
+        },
+        {
             field: 'Address',
             headerName: 'Address',
             align: 'center',
@@ -57,54 +57,39 @@ function PaymentDetail() {
                 </Typography>
         },
         {
-            field: 'PaymentId',
-            headerName: 'Payment Id',
-            align: 'center',
-            width: 200,
-            renderCell: (params) =>
-                <Typography variant="body2" color="textSecondary" component="p" style={{
-                    margin: "auto",
-                    letterSpacing: "1px",
-                }}>
-                    {params.value}
-                </Typography>
-        },
-        {
-            field: 'OrderDate',
-            headerName: 'Order Date',
-            align: 'center',
-            width: 200,
-            renderCell: (params) =>
-                <Typography variant="body2" color="textSecondary" component="p" style={{
-                    padding: "0px 12px",
-                }}>
-                    {moment(params.value).format("MMMM DD , YYYY")}
-                </Typography>
-        },
-        {
-            field: 'Details',
-            headerName: 'Details',
+            field: 'report',
+            headerName: 'Report',
             align: 'center',
             width: 120,
             renderCell: (params) =>
                 <Button
                     style={{ backgroundColor: '#595775 ', textAlign: 'center', color: 'white', padding: '2px 8px', margin: 'auto' }}
                 >
-                    <PayDetails details={params.value} />
-                </Button >
+                    <SpammersDetail spammer={params.value} />
+                </Button>
         },
         {
             field: 'Status',
-            align: 'center',
             headerName: 'Status',
-            width: 130,
+            align: 'center',
+            width: 120,
             renderCell: (params) =>
-                <Button style={params.value.status === false ? {
-                    backgroundColor: 'red', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
-                } : {
-                    backgroundColor: 'green', textAlign: 'center', color: 'white', padding: '8px 16px', letterSpacing: '1px', margin: 'auto', fontWeight: 'bold',
-                }} onClick={() => statusUpdate(params.value._id)}>
-                    {params.value.status === false ? 'pending' : 'Done'}
+                <Typography variant="body2" color="textSecondary" component="p" style={{
+                    padding: "0px 12px",
+                }}>
+                    {params.value == 2 ? "Active" : "Inactive"}
+                </Typography>
+        },
+        {
+            field: 'Block',
+            headerName: 'Block',
+            align: 'center',
+            width: 120,
+            renderCell: (params) =>
+                <Button color="secondary" variant='contained' style={{
+                    padding: "6px 12px",
+                }}>
+                    Block
                 </Button>
         },
     ];
@@ -124,26 +109,26 @@ function PaymentDetail() {
                 }}>
                     <div style={{
                         textAlign: 'center',
-                        padding: '25px 0px 15px 0px',
+                        padding: '10px 0px 15px 0px',
                         fontSize: '20px',
                         fontWeight: 'bold',
                         letterSpacing: '2px',
                         color: '#fff',
                         textTransform: 'uppercase',
-                    }}>Payment History</div>
-
+                    }}>All Users</div>
                     <div style={{
-                        padding: '5px 5px',
-                        height: '90vh'
+                        padding: '5px 5px 10px 5px',
+                        height: '100vh'
                     }} >
                         <DataGrid
                             rows={rows}
                             columns={columns}
                             rowHeight={90}
                             headerHeight={60}
-                            pageSize={5}
-                            rowsPerPageOptions={[5, 10, 20, 50]}
+                            pageSize={6}
+                            rowsPerPageOptions={[6, 12, 18, 50]}
                             checkboxSelection
+                            autoPageSize
                             sx={{
                                 "& .MuiDataGrid-columnHeaderTitle": {
                                     color: "black",
@@ -173,4 +158,4 @@ function PaymentDetail() {
         </>
     )
 }
-export default PaymentDetail;
+export default Spammer;

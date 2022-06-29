@@ -5,6 +5,7 @@ export const LOGOUT = 'LOGOUT';
 export const UPDATE_SINGLE_USER = 'UPDATE_SINGLE_USER';
 export const IS_LOADING = 'IS_LOADING';
 export const IS_NOT_LOADING = 'IS_NOT_LOADING';
+export const FETCH_USERS = 'FETCH_USERS';
 
 // homePage
 export const FETCH_HOMEPAGE = 'FETCH_HOMEPAGE';
@@ -22,6 +23,9 @@ export const START_FOODPAGE = 'START_FOODPAGE';
 export const END_FOODPAGE = 'END_FOODPAGE';
 export const DELETE_FOODPAGE = "DELETE_FOODPAGE";
 export const UPDATE_FOODPAGE = "UPDATE_FOODPAGE";
+export const FETCH_FOODPAGE_BY_ID = "FETCH_FOODPAGE_BY_ID";
+export const UPDATE_COMMENT_FOOD = "UPDATE_COMMENT_FOOD";
+export const DELETE_COMMENT_FOOD = "DELETE_COMMENT_FOOD";
 
 // payment
 export const FETCH_PAYMENT_FOOD = 'FETCH_PAYMENT_FOOD';

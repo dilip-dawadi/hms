@@ -74,7 +74,6 @@ export const getFoodPage = async (req, res) => {
         } else if (req.query.tags === 'none' && req.query.title.regex === 'none') {
             const foodPageData = await foodPage.find().sort(SORT).limit(LIMIT).skip(startIndex);
             res.json({ foodPageData, currentPage: Number(PAGE), totalFoodPage: Math.ceil(TotalPages / LIMIT) });
-            console.log('byee');
         } else if (req.query.tags === 'none' && req.query.title.regex !== 'none') {
             const features = new APIfeatures(foodPage.find(), req.query)
                 .titleFiltering().sorting().paginating()
@@ -94,17 +93,16 @@ export const getFoodPage = async (req, res) => {
 };
 
 export const getFoodBySearch = async (req, res) => {
-    const { searchFood, tags: tag } = req.query;
+    const { searchFood, tags } = req.query;
     try {
         const title = new RegExp(searchFood, 'i');
-        const tags = new RegExp(tag, 'i');
-        const foodSearchData = await foodPage.find({ $or: [{ title }, { tags }] });
+        const foodSearchData = await foodPage.find({ $or: [{ title }, { tags: { $in: tags.split(',') } }] });
         if (searchFood !== 'none') {
             res.json({ foodSearchData, message: foodSearchData.length + " food found for " + '"' + searchFood + '"' });
         }
         else {
             res.json({
-                foodSearchData, message: foodSearchData.length + " item found for " + '"' + tag + '"'
+                foodSearchData, message: foodSearchData.length + " item found for " + '"' + tags + '"'
             })
         }
 
@@ -198,3 +196,65 @@ export const deleteFood = async (req, res) => {
         res.status(500).json({ message: error });
     }
 }
+
+export const getFoodById = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const foodById = await foodPage.findById(id);
+        const title = foodById.title;
+        res.json({ foodById, message: "Food " + title });
+    }
+    catch (error) {
+        res.status(404).json({ message: error });
+    }
+}
+
+export const createCommentFood = async (req, res) => {
+    const { id } = req.params;
+    const { formData, updated } = req.body;
+    try {
+        const status = updated ? 'updated' : 'created';
+        const food = await foodPage.findById(id);
+        if (!food) return res.status(404).json({ message: 'Food not found' });
+        if (status === 'updated') {
+            const userComment = food.comments.find(comment => comment.userId === formData.userId);
+            userComment.comments = formData.comments;
+            const updatedCommentFood = await foodPage.findByIdAndUpdate(id, { ...food, comments: userComment.comments }, { new: true });
+            res.json({ updatedCommentFood, message: "Comment Updated Successfully" });
+        }
+        else {
+            const userComment = food.comments.find(comment => comment.userId === formData.userId);
+            if (userComment) {
+                return res.status(400).json({ message: "You have already commented" });
+            }
+            food.comments.push(formData);
+            const updatedCommentFood = await foodPage.findByIdAndUpdate(id, food, { new: true });
+            res.json({ updatedCommentFood, message: "Comment Successfully" });
+        }
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+export const deleteCommentFood = async (req, res) => {
+    const { id, cmtuserId } = req.params;
+    try {
+        const food = await foodPage.findById(id);
+        if (!food) return res.status(404).json({ message: 'Food not found' });
+        const comment = food.comments.find(comment => comment.userId === cmtuserId);
+        if (!comment) return res.status(404).json({ message: 'Comment not found' });
+        food.comments.pull(comment);
+        const deletedCommentFood = await foodPage.findByIdAndUpdate(id, food, { new: true });
+        res.json({ deletedCommentFood, message: "Comment Deleted" });
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+
+// report garnya bitikai jaslai report gareko xa tesko
+// usermodel ma report vanya array aauna paryo
+// aane comment ma tyo report tai individual user lai janexa
+// jasme report id aane report on which food by which user aane report ko reason and what was the bad comment dekhaunya xa
+//last when the spam user login he/she will be notify that he/she has been reported for spamming
+
+
