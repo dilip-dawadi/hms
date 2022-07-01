@@ -21,6 +21,7 @@ function PaymentDetail() {
             OrderDate: payment.createdAt,
             Status: payment,
             Details: payment.cart,
+            EstimatedTime: payment.createdAt,
         }
     });
     const columns = [
@@ -74,7 +75,7 @@ function PaymentDetail() {
                 <Typography variant="body2" color="textSecondary" component="p" style={{
                     padding: "0px 12px",
                 }}>
-                    {moment(params.value).format("MMMM DD , YYYY")}
+                    {moment(params.value).format('MMMM Do, hh:mm a') || 'none'}
                 </Typography>
         },
         {
@@ -94,8 +95,6 @@ function PaymentDetail() {
             align: 'center',
             headerName: 'Status',
             width: 170,
-            // valueGetter: (params) =>
-            //     `${params.row.firstName || ''} ${params.row.lastName || ''}`
             renderCell: (params) =>
                 <Button style={{
                     width: '100%',
@@ -104,6 +103,18 @@ function PaymentDetail() {
                     {params.value.status === false ? <img src='/process.png' alt='delivering' height={120} /> : <img src='/done.png' alt='delivered' height={120} />}
                 </Button>
         },
+        {
+            field: 'EstimatedTime',
+            headerName: 'Estimated Time',
+            align: 'center',
+            width: 200,
+            renderCell: (params) =>
+                <Typography variant="body2" color="textSecondary" component="p" style={{
+                    padding: "0px 12px",
+                }}>
+                    {moment(params.value).add(Math.floor(Math.random() * 10) + 1, 'hours').add(Math.floor(Math.random() * 10) + 1, 'minutes').add(Math.floor(Math.random() * 10) + 1, "day").format('MMMM Do, hh:mm a') || 'none'}
+                </Typography>
+        }
     ];
     return (
         <>
@@ -140,7 +151,6 @@ function PaymentDetail() {
                                 fontWeight: 'bold',
                                 letterSpacing: '2px',
                                 color: '#fff',
-                                letterSpacing: '1px',
                                 textTransform: 'uppercase',
                             }}>Payment History</div>
 
